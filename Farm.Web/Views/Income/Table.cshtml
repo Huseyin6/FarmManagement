@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewBag.Title = "Table";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <h3>Gelir Tablosu</h3>
+
+    <section class="panel panel-featured panel-featured-info panel-default">
+        <div class="panel-body" id="filter-panel">
+            @using (Html.BeginForm("Table", "Income", FormMethod.Get, new { @class = "form-inline", style = "margin:5px 0px" }))
+            {
+                @*<div class="form-group " id="filter-panel">
+                        <label class="filter-label " for="State">Gelir Türü</label>
+                        @Html.DropDownList("state", GetStatusSelectList(), Localize("PassiveOrActive"), new { @class = "form-control autoWidth" })
+                    </div>
+                    <div class="form-group " id="filter-panel">
+                        <label class="filter-label" for="BeginDate">@Localize("AnnouncementBeginDate")</label>
+                        @Html.DropDownList("beginYear", GetNumberRangeSelectList(1960, DateTime.Today.Year), new { @class = "form-control autoWidth" })
+                    </div>
+                    <div class="form-group " id="filter-panel">
+                        <label class="filter-label" for="EndDate">@Localize("AnnouncementEndDate")</label>
+                        @Html.DropDownList("endYear", GetNumberRangeSelectList(1960, DateTime.Today.Year), new { @class = "form-control autoWidth" })
+                    </div>
+                    <div class="form-group  pull-right">
+                        <button type="submit" class="btn btn-info btn-filter" data-loading-text="@Localize("Searching")">@Localize("Filter")</button>
+                    </div>*@
+            }
+        </div>
+    </section>
+    <section class="panel panel-featured panel-default">
+        <div class="panel-heading">
+            <div class="text-right">
+                <button class="btn btn-primary" onclick="deneme('#ex1')">Yeni Kayıt</button>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-hover mb-none datatable" id="announcementtable">
+                    <thead>
+                        <tr role="row">
+                            <th class="sorting_disabled" rowspan="1" colspan="1">Gelir Türü</th>
+                            <th class="sorting_disabled" rowspan="1" colspan="1">Tarih</th>
+                            <th class="hidden-xs hidden-sm sorting_disabled" rowspan="1" colspan="1">Tutar</th>
+                            <th class="hidden-xs hidden-sm sorting_disabled" rowspan="1" colspan="1">Açıklama</th>
+                            <th class="operationTableWideColumn">
+                                <span class="visible-xs visible-sm text-center">Düzenle</span>
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @*@if (Model != null)
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Title.Current</td>
+                                        <td class="hidden-xs hidden-sm hidden-md">
+                                            @Html.CheckBoxFor(m => item.IsActive, new { data_toggle = "asyncswitch", data_on_text = Localize("Active"), data_off_text = Localize("Passive"), data_url = Url.Action("ChangeState", "AnnouncementManagement", new { id = item.Id }) })
+                                        </td>
+                                        <td class="visible-xs visible-sm visible-md">
+                                            @Html.DisplayFor(m => item.IsActive)
+                                        </td>
+                                        <td class="hidden-xs hidden-sm">@Html.DisplayFor(m => item.ActivityBeginDate)</td>
+                                        <td class="hidden-xs hidden-sm">@Html.DisplayFor(m => item.ActivityEndDate)</td>
+                                        <td class="text-center">
+                                            @Html.EditButton(Url.Action("Edit", new { id = item.Id }))
+                                            @Html.DeleteButton(Url.Action("Delete", new { id = item.Id }))
+                                        </td>
+                                    </tr>
+                                }
+                            }*@
+                    </tbody>
+                </table>
+                @*@Html.Partial("_NoDataFound")*@
+            </div>
+        </div>
+    </section>
+</div>
+
+<script type="text/javascript">
+    function deneme(x) {
+        $(x).modal('show');
+    }
+</script>
+
