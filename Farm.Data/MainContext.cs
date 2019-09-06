@@ -13,7 +13,8 @@ namespace Farm.Data
         public MainContext(): base("name=heroku-postgre-db"){
         }
         public DbSet<Test> Tests { get; set; }
-
+        public DbSet<Cow> Cows { get; set; }
+         
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             Database.SetInitializer<MainContext>(null);
