@@ -1,6 +1,6 @@
-﻿using Farm.Data;
-using Farm.Data.Interfaces;
-using Farm.Domain.Entities;
+﻿
+using Farm.Data;
+using Farm.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,18 +11,20 @@ namespace Farm.Web.Controllers
 {
     public class HomeController : Controller
     {
-        //private IUnitOfWork _db;
-        //public HomeController(IUnitOfWork db)
-        //{
-        //    _db = db;
-        //}
-        // GET: Home
+       
         public ActionResult Index()
         {
-            //using(var context = new MainContext()){
-            //    return Json(context.Cows.ToList(),JsonRequestBehavior.AllowGet);
-            //}
-            return View();
+            using (var context=new MainContext()){
+                var test = new Test()
+                {
+                    Name = "tset"
+                };
+                context.Tests.Add(test);
+                context.SaveChanges();
+
+                var list = context.Tests;
+                return View(list.ToList());
+            }
         }
     }
 }

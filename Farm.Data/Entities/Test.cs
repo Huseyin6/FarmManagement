@@ -5,16 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Farm.Domain.Entities
+namespace Farm.Data.Entities
 {
-    public class Calf
+    public class Test
     {
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        public DateTime Birthdate { get; set; }
-        public int Sex { get; set; }
-        public int State { get; set; }
-
     }
 }

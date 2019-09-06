@@ -1,26 +1,25 @@
-﻿using System;
+﻿using Farm.Data.Entities;
+using System;
+using System.Collections.Generic;
 using System.Data.Entity;
-using Farm.Domain.Entities;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace Farm.Data
-{   
-    
-    public class MainContext : DbContext
+{
+    public class MainContext: DbContext
     {
-        
-        public MainContext():base("Name=heroku-postgre-db")
-        {
-            var deneme=Database.Connection.ConnectionString;
-        }    
-        public DbSet<Cow> Cows { get; set; }
-        public DbSet<Calf> Calves { get; set; }
+        public MainContext(): base("name=heroku-postgre-db"){
+        }
+        public DbSet<Test> Tests { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Cow>();
-
-            modelBuilder.Entity<Calf>();
+            Database.SetInitializer<MainContext>(null);
             modelBuilder.HasDefaultSchema("public");
-
             base.OnModelCreating(modelBuilder);
         }
+
     }
 }
