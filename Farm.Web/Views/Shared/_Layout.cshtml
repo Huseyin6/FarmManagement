@@ -1,0 +1,240 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Welcome To Farm Management Project</title>
+    <!-- Favicon-->
+    <link rel="icon" href="~/Content/favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
+
+    <!-- Waves Effect Css -->
+    <link href="~/Content/node-waves/waves.css" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="~/Content/animate-css/animate.css" rel="stylesheet" />
+
+    <!-- Morris Chart Css-->
+    <link href="~/Content/morrisjs/morris.css" rel="stylesheet" />
+
+    <!-- Custom Css -->
+    <link href="~/Content/style.css" rel="stylesheet">
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="~/Content/all-themes.css" rel="stylesheet" />
+
+</head>
+
+<body class="theme-light-blue">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="preloader">
+                <div class="spinner-layer pl-red">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            <p>Please wait...</p>
+        </div>
+    </div>
+    <!-- #END# Page Loader -->
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    <!-- #END# Overlay For Sidebars -->
+    <!-- Top Bar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="bars"></a>
+                @Html.ActionLink("Farm Management", "Index", "Home", new { @class = "navbar-brand" })
+            </div>
+        </div>
+    </nav>
+    <!-- #Top Bar -->
+    <section>
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar">
+            <!-- User Info -->
+            <div class="user-info">
+                <div class="image">
+                    <img src="~/Content/images/user.png" width="48" height="48" alt="User" /> @* Resim veritabanında kayıtlı olacak. kullanıcı profil resmi. *@
+                </div>
+                <div class="info-container">
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</div>
+                    <div class="email">john.doe@example.com</div> @* Mail'de veritabanında olacak. kullanıcı tablosunda tutulacak. *@
+                    <div class="btn-group user-helper-dropdown">
+                        <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="@Url.Action("Index","Profile")"><i class="material-icons">person</i>Profil</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="javascript:void(0);"><i class="material-icons">input</i>Çıkış</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- #User Info -->
+            <!-- Menu -->
+            <div class="menu">
+                <ul class="list">
+                    <li class="header">FİNANSAL İŞLEMLER</li>
+                    <li class="active">
+                        <a href="@Url.Action("Index","Home")">
+                            <i class="material-icons">home</i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">layers</i>
+                            <span>Gelir</span>
+                        </a>
+
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="@Url.Action("Table","Income")">Tablo</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Statistic","Income")">İstatistik</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">layers</i>
+                            <span>Gider</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="@Url.Action("Table","Expense")">Tablo</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Statistic","Expense")">İstatistik</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="header">YÖNETİMSEL İŞLEMLER</li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">layers</i>
+                            <span>Hayvan Yönetimi</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="@Url.Action("Cows","AnimalManagement")">İnek</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Calves","AnimalManagement")">Buzağı</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Heifers","AnimalManagement")">Düve</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Steers","AnimalManagement")">Dana</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- #Menu -->
+            <!-- Footer -->
+            <div class="legal">
+                <div class="copyright">
+                    &copy; @DateTime.Now.Year <a href="javascript:void(0);"></a>
+                </div>
+                <div class="version">
+                    <p>Template: AdminBsb</p>
+                </div>
+            </div>
+            <!-- #Footer -->
+        </aside>
+        <!-- #END# Left Sidebar -->
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            @RenderBody()
+        </div>
+    </section>
+    <div id="ex1" class="modal">
+        @using (Html.BeginForm("Create", "AnnouncementManagement", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group">
+                        @Html.Label("Adı", new { @class = "col-lg-3 col-xl-2 control-label " })
+                        <div class="col-md-2">
+                            tect
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-right" style="margin-bottom:15px">
+                <button class="btn btn-primary" type="submit">Kaydet</button>
+                <a href="#" rel="modal:close" class="btn btn-danger">Geri</a>
+            </div>
+        }
+
+    </div>
+    <!-- Jquery Core Js -->
+    <script src="~/Content/jquery/jquery.min.js"></script>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+    <!-- Bootstrap Core Js -->
+    <script src="~/Content/bootstrap/js/bootstrap.js"></script>
+
+    <!-- Select Plugin Js -->
+    <script src="~/Content/bootstrap-select/js/bootstrap-select.js"></script>
+
+    <!-- Slimscroll Plugin Js -->
+    <script src="~/Content/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+    <!-- Waves Effect Plugin Js -->
+    <script src="~/Content/node-waves/waves.js"></script>
+
+    <!-- Jquery CountTo Plugin Js -->
+    <script src="~/Content/jquery-countto/jquery.countTo.js"></script>
+
+    <!-- Morris Plugin Js -->
+    <script src="~/Content/raphael/raphael.min.js"></script>
+    @*<script src="~/Content/morrisjs/morris.js"></script>*@
+
+    <!-- ChartJs -->
+    <script src="~/Content/chartjs/Chart.bundle.js"></script>
+
+    <!-- Flot Charts Plugin Js -->
+    @*<script src="~/Content/flot-charts/jquery.flot.js"></script>
+        <script src="~/Content/flot-charts/jquery.flot.resize.js"></script>
+        <script src="~/Content/flot-charts/jquery.flot.pie.js"></script>
+        <script src="~/Content/flot-charts/jquery.flot.categories.js"></script>
+        <script src="~/Content/flot-charts/jquery.flot.time.js"></script>*@
+
+    <!-- Sparkline Chart Plugin Js -->
+    <script src="~/Content/jquery-sparkline/jquery.sparkline.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+
+
+    <!-- Custom Js -->
+    <script src="~/Content/js/admin.js"></script>
+    <script src="~/Content/js/pages/index.js"></script>
+
+    <!-- Demo Js -->
+    <script src="~/Content/js/demo.js"></script>
+</body>
+</html>
