@@ -49,6 +49,9 @@
     <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.Mvc5.4.0.2\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -207,6 +210,7 @@
     <Content Include="Content\chartjs\Chart.bundle.min.js" />
     <Content Include="Content\chartjs\Chart.js" />
     <Content Include="Content\chartjs\Chart.min.js" />
+    <Content Include="Content\confirmation\confirmation.js" />
     <Content Include="Content\favicon.ico" />
     <Content Include="Content\flot-charts\excanvas.js" />
     <Content Include="Content\flot-charts\excanvas.min.js" />
@@ -398,7 +402,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AnimalManagementController.cs" />
+    <Compile Include="Controllers\CalvesController.cs" />
+    <Compile Include="Controllers\CowsController.cs" />
     <Compile Include="Controllers\ExpenseController.cs" />
     <Compile Include="Controllers\IncomeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -407,9 +412,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\MainContext.cs" />
-    <Compile Include="Models\Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\CowsViewModel.cs" />
+    <Compile Include="Views\HtmlHelpers\HtmlButtonHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -424,15 +429,15 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Cows\Index.cshtml" />
-    <Content Include="Views\AnimalManagement\Calves.cshtml" />
-    <Content Include="Views\AnimalManagement\Heifers.cshtml" />
-    <Content Include="Views\AnimalManagement\Steers.cshtml" />
     <Content Include="Views\Expense\Statistic.cshtml" />
     <Content Include="Views\Income\Statistic.cshtml" />
     <Content Include="Views\Income\Table.cshtml" />
     <Content Include="Views\Expense\Table.cshtml" />
-    <Content Include="Views\AnimalManagement\Cows.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Cows\Create.cshtml" />
+    <Content Include="Views\Cows\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Calves\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\View.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -442,6 +447,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
+    <Folder Include="Views\Shared\DisplayTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Farm.Data\Farm.Data.csproj">

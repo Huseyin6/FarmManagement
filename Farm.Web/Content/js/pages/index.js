@@ -12,6 +12,17 @@
     //initRealTimeChart();
     //initDonutChart();
     initSparkline();
+    $(document).ready(function () {
+        $('#cow-list-table').DataTable({
+            sDom: "<'row datatables-header form-inline'<'col-sm-12 col-md-6'><'col-sm-12 col-md-6'f>r><'table-responsive't><'row datatables-footer'<'col-sm-12 col-md-4 col-md-offset-4 'p>>",
+            sort: false,
+            info: false,
+            "iDisplayLength": 15,
+            "pagingType": "simple_numbers"
+        });
+        $('#cow-list-table_paginate').css('text-align', 'center');
+
+    });
 });
 
 var realtime = 'on';
@@ -113,3 +124,33 @@ function getRandomData() {
 
     return res;
 }
+
+$('.switch', 'body').bootstrapSwitch({
+    onText: 'Evet',
+    offText: 'Hayır',
+    labelWidth: 30,
+    handleWidth: 40
+});
+$("[data-toggle='asyncswitch']", 'body').bootstrapSwitch({
+    size: 'small',
+    labelWidth: 25,
+    handleWidth: 30
+});
+$("[data-toggle='asyncswitch']", 'body').on('switchChange.bootstrapSwitch', function (e) {
+    //var relatedSwitch = $(this);
+    //$.ajax({
+    //    url: $(this).data("url"),
+    //    type: "POST",
+    //    success: function (result) {
+    //        if (relatedSwitch.data("reload")) {
+    //            location.reload();
+    //        }
+    //        toastr.success(successMessage);
+    //    },
+    //    error: function (result) {
+    //        relatedSwitch.bootstrapSwitch('toggleState', !relatedSwitch.bootstrapSwitch('state'));
+    //        toastr.error(errorMessage);
+    //    }
+    //});
+    alert('hi')
+});

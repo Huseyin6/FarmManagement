@@ -1,8 +1,86 @@
-﻿
+﻿@using Farm.Web.Views.HtmlHelpers
+@model IEnumerable<Farm.Data.Entities.Cow>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Cows";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="row">
+    <h3>Cows Table</h3>
 
-<h2>Cows</h2>
+    <section class="panel panel-featured panel-featured-info panel-default">
+        <div class="panel-body" id="filter-panel">
+            @using (Html.BeginForm("Table", "Income", FormMethod.Get, new { @class = "form-inline", style = "margin:5px 0px" }))
+            {
+                @*<div class="form-group " id="filter-panel">
+                        <label class="filter-label " for="State">Gelir Türü</label>
+                        @Html.DropDownList("state", GetStatusSelectList(), Localize("PassiveOrActive"), new { @class = "form-control autoWidth" })
+                    </div>
+                    <div class="form-group " id="filter-panel">
+                        <label class="filter-label" for="BeginDate">@Localize("AnnouncementBeginDate")</label>
+                        @Html.DropDownList("beginYear", GetNumberRangeSelectList(1960, DateTime.Today.Year), new { @class = "form-control autoWidth" })
+                    </div>
+                    <div class="form-group " id="filter-panel">
+                        <label class="filter-label" for="EndDate">@Localize("AnnouncementEndDate")</label>
+                        @Html.DropDownList("endYear", GetNumberRangeSelectList(1960, DateTime.Today.Year), new { @class = "form-control autoWidth" })
+                    </div>
+                    <div class="form-group  pull-right">
+                        <button type="submit" class="btn btn-info btn-filter" data-loading-text="@Localize("Searching")">@Localize("Filter")</button>
+                    </div>*@
+            }
+        </div>
+    </section>
+    <section class="panel panel-featured panel-default">
+        <div class="panel-heading">
+            <div class="text-right">
+                <a href="@Url.Action("Create","Cows")"><button class="btn btn-primary">Yeni Kayıt</button></a>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover" id="cow-list-table">
+                    <thead>
+                        <tr role="row">
+                            <th class="sorting_disabled" rowspan="1" colspan="1">Küpe No</th>
+                            <th class="sorting_disabled" rowspan="1" colspan="1">Adı</th>
+                            <th class="hidden-xs hidden-sm sorting_disabled" rowspan="1" colspan="1">Doğum Tarihi</th>
+                            <th class="hidden-xs hidden-sm sorting_disabled" rowspan="1" colspan="1">Durumu</th>
+                            <th class="hidden-xs sorting_disabled" rowspan="1" colspan="1">Hamile</th>
+                            <th class="hidden-xs  sorting_disabled" rowspan="1" colspan="1">Süt Verme Durumu</th>
+                            <th class="operationTableWideColumn">
+                                <span class="visible-xs text-center">Edit</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.EaringNo</td>
+                                    <td>@item.Name</td>
+                                    <td class="hidden-xs hidden-sm">@Html.DisplayFor(m => item.BirthDate)</td>
+                                    <td class="hidden-xs hidden-sm">@Html.DisplayFor(m => item.State)</td>
+                                    <td class="hidden-xs">
+                                        @Html.CheckBoxFor(m => item.IsPregnant, new { @class = "custom-control-input", data_toggle = "asyncswitch", data_on_text = "Evet", data_off_text = "Hayır", data_url = Url.Action("ChangeState", "AnnouncementManagement", new { id = item.Id }) })
+                                    </td>
+                                    <td class="hidden-xs">
+                                        @Html.CheckBoxFor(m => item.IsLactation, new { @class = "custom-control-input", data_toggle = "asyncswitch", data_on_text = "Evet", data_off_text = "Hayır", data_url = Url.Action("ChangeState", "AnnouncementManagement", new { id = item.Id }) })
+                                    </td>
 
+                                    <td class="text-center">
+                                        @Html.EditButton(Url.Action("Edit", new { id = item.Id }), "sm")
+                                        @Html.DeleteButton(Url.Action("Delete", new { id = item.Id }))
+
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+                @*@Html.Partial("_NoDataFound")*@
+            </div>
+        </div>
+
+    </section>
+</div>

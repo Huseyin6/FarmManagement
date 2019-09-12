@@ -1,0 +1,46 @@
+﻿@model CowsViewModel
+@Html.AntiForgeryToken()
+<h2 class="page-header">Cow Add</h2>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="form-group">
+            @Html.LabelFor(m => m.EaringNo, new { @class = "col-lg-3 col-xl-2 control-label " })
+            <div class="col-md-4">
+                @Html.EditorFor(m => m.EaringNo)
+                @Html.ValidationMessageFor(m => m.EaringNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group ">
+            @Html.LabelFor(m => m.Name, new { @class = "col-lg-3 col-xl-2 control-label" })
+            <div class="col-md-4">
+                @Html.EditorFor(m => m.Name)
+                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.BirthDate, new { @class = "col-lg-3 col-xl-2 control-label " })
+            <div class="col-md-4">
+                @Html.EditorFor(m => m.BirthDate)
+                @Html.ValidationMessageFor(m => m.BirthDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.IsPregnant, new { @class = "col-lg-3 col-xl-2 control-label" })
+            <div class="col-md-4">
+                @Html.CheckBoxFor(m => m.IsPregnant, new { @class = "switch" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.IsLactation, new { @class = "col-lg-3 col-xl-2 control-label" })
+            <div class="col-md-4">
+                @Html.CheckBoxFor(m => m.IsLactation, new { @class = "switch" })
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class=" text-right" style="margin-bottom:15px">
+    <button class="btn btn-primary">Kaydet</button>
+</div>
+
