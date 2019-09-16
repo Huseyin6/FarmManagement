@@ -1,6 +1,4 @@
-﻿
-using Farm.Data;
-using Farm.Data.Entities;
+﻿using Farm.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +7,14 @@ using System.Web.Mvc;
 
 namespace Farm.Web.Controllers
 {
-    public class HomeController : Controller
+    public class SteersController : Controller
     {
-        UnitOfWork unitOfWork = new UnitOfWork(new MainContext());
+        UnitOfWork db = new UnitOfWork(new MainContext());
 
+        // GET: Steers
         public ActionResult Index()
         {
-            return View();
+            return View(db.SteerRepository.GetAll());
         }
     }
 }

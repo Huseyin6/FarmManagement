@@ -1,10 +1,10 @@
-﻿@model List<Farm.Data.Entities.Cow>
+﻿@model IEnumerable<Farm.Data.Entities.Heifer>
 @{
-    ViewBag.Title = "Cows";
+    ViewBag.Title = "Heifers";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="row">
-    <h3>Cows Table</h3>
+    <h3>@ViewBag.Title Table</h3>
 
     <section class="panel panel-featured panel-featured-info panel-default">
         <div class="panel-body" id="filter-panel">
@@ -44,7 +44,6 @@
                             <th class="hidden-xs hidden-sm sorting_disabled" rowspan="1" colspan="1">Doğum Tarihi</th>
                             <th class="hidden-xs hidden-sm sorting_disabled" rowspan="1" colspan="1">Durumu</th>
                             <th class="hidden-xs sorting_disabled" rowspan="1" colspan="1">Hamile</th>
-                            <th class="hidden-xs  sorting_disabled" rowspan="1" colspan="1">Süt Verme Durumu</th>
                             <th class="operationTableWideColumn">
                                 <span class="visible-xs text-center">Edit</span>
                             </th>
@@ -53,7 +52,7 @@
                     <tbody>
                         @if (Model != null)
                         {
-                            foreach (var item in Model.OrderBy(m=>m.StateId))
+                            foreach (var item in Model)
                             {
                                 <tr>
                                     <td>@item.EaringNo</td>
@@ -61,12 +60,8 @@
                                     <td class="hidden-xs hidden-sm">@Html.DisplayFor(m => item.BirthDate)</td>
                                     <td class="hidden-xs hidden-sm">@Html.DisplayFor(m => item.State.Name)</td>
                                     <td class="hidden-xs">
-                                        @Html.CheckBoxFor(m => item.IsPregnant, new { @class = "custom-control-input", @readonly = "readonly" , data_toggle = "asyncswitch", data_on_text = "Evet", data_off_text = "Hayır", data_url = Url.Action("ChangeState", "Cows", new { id = item.Id}) })
+                                        @Html.CheckBoxFor(m => item.IsPregnant, new { @class = "custom-control-input", data_toggle = "asyncswitch", data_on_text = "Evet", data_off_text = "Hayır", data_url = Url.Action("ChangeState", "AnnouncementManagement", new { id = item.Id }) })
                                     </td>
-                                    <td class="hidden-xs">
-                                        @Html.CheckBoxFor(m => item.IsLactation, new { @class = "custom-control-input", @readonly = "readonly", data_toggle = "asyncswitch", data_on_text = "Evet", data_off_text = "Hayır", data_url = Url.Action("ChangeState", "Cows", new { id = item.Id }) })
-                                    </td>
-
                                     <td class="text-center">
                                         @Html.EditButton(Url.Action("Edit", new { id = item.Id }), "sm")
                                         @Html.DeleteButton(Url.Action("Delete", new { id = item.Id }))

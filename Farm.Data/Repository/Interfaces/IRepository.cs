@@ -10,10 +10,10 @@ namespace Farm.Data.Interfaces
     {       
         T GetById(int id);
 
-        IEnumerable<T> GetAll();
+        List<T> GetAll();
         void Add(T entity);
         void Remove(T entity);
         void RemoveById(int id);
-
+        void Update(T entity);
     }
 }

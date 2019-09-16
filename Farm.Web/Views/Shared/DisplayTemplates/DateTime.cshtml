@@ -1,0 +1,19 @@
+﻿@model DateTime?
+
+@if (Model.HasValue)
+{
+    string format = (string)ViewData["format"];
+    if (format == null)
+    {
+        @Model.Value.ToShortDateString()
+    }
+    else
+    {
+        @Model.Value.ToString(format)
+    }
+}
+else
+{
+    <p>Devam Ediyor</p>
+}
+

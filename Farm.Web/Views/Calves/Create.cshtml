@@ -1,0 +1,5 @@
+﻿@model CalvesViewModel
+@using (Html.BeginForm("Create", "Calves", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.Partial("_CreateOrEdit")
+}

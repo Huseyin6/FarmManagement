@@ -7,10 +7,7 @@ using System.Threading.Tasks;
 
 namespace Farm.Data.Entities
 {
-    public class Test
+    public class Steer:BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
-        public string Name { get; set; }
     }
 }

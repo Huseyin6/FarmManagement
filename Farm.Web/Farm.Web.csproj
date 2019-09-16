@@ -132,6 +132,7 @@
     <Content Include="Content\all-themes.css" />
     <Content Include="Content\animate-css\animate.css" />
     <Content Include="Content\animate-css\animate.min.css" />
+    <Content Include="Content\bootstrap-confirmation.js" />
     <Content Include="Content\bootstrap-select\css\bootstrap-select.css" />
     <Content Include="Content\bootstrap-select\css\bootstrap-select.min.css" />
     <Content Include="Content\bootstrap-select\js\bootstrap-select.js" />
@@ -211,6 +212,11 @@
     <Content Include="Content\chartjs\Chart.js" />
     <Content Include="Content\chartjs\Chart.min.js" />
     <Content Include="Content\confirmation\confirmation.js" />
+    <Content Include="Content\datatable\bootstrap-table.css" />
+    <Content Include="Content\datatable\bootstrap-table.js" />
+    <Content Include="Content\datatable\dataTables.bootstrap.min.css" />
+    <Content Include="Content\datatable\js\datatables.js" />
+    <Content Include="Content\datatable\js\jquery.dataTables.js" />
     <Content Include="Content\favicon.ico" />
     <Content Include="Content\flot-charts\excanvas.js" />
     <Content Include="Content\flot-charts\excanvas.min.js" />
@@ -405,19 +411,26 @@
     <Compile Include="Controllers\CalvesController.cs" />
     <Compile Include="Controllers\CowsController.cs" />
     <Compile Include="Controllers\ExpenseController.cs" />
+    <Compile Include="Controllers\HeifersController.cs" />
     <Compile Include="Controllers\IncomeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\SteersController.cs" />
     <Compile Include="FarmWebViewPage.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\CalvesViewModel.cs" />
     <Compile Include="ViewModels\CowsViewModel.cs" />
+    <Compile Include="ViewModels\HeifersViewModel.cs" />
+    <Compile Include="ViewModels\SteersViewModel.cs" />
     <Compile Include="Views\HtmlHelpers\HtmlButtonHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\web.config" />
+    <Content Include="Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
@@ -433,11 +446,17 @@
     <Content Include="Views\Income\Statistic.cshtml" />
     <Content Include="Views\Income\Table.cshtml" />
     <Content Include="Views\Expense\Table.cshtml" />
-    <Content Include="Views\Profile\Index.cshtml" />
-    <Content Include="Views\Cows\Create.cshtml" />
     <Content Include="Views\Cows\_CreateOrEdit.cshtml" />
     <Content Include="Views\Calves\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\View.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Boolean.cshtml" />
+    <Content Include="Views\Heifers\Index.cshtml" />
+    <Content Include="Views\Steers\Index.cshtml" />
+    <Content Include="Views\Calves\Create.cshtml" />
+    <Content Include="Views\Calves\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Cows\Edit.cshtml" />
+    <Content Include="Views\Cows\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -448,7 +467,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Shared\DisplayTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Farm.Data\Farm.Data.csproj">

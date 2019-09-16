@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace Farm.Data.Entities
+namespace Farm.Web.ViewModels
 {
-    public class Calf :BaseEntity
-    {  
+    public class CalvesViewModel:BaseViewModel
+    {
         public int Sex { get; set; }
         public bool DrinkMilk { get; set; } // Does He/She Drink Milk ?
     }

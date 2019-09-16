@@ -12,9 +12,9 @@ namespace Farm.Data.Repository
     {
         protected DbContext  _dbContext;
         private DbSet<T> _dbSet;
-        public RepositoryBase(DbContext maincontext)// miras alanlar kullanabilmesi için bir context vermeleri gerek
+        public RepositoryBase(DbContext dbContext)// miras alanlar kullanabilmesi için bir context vermeleri gerek
         {
-            _dbContext = maincontext;
+            _dbContext = dbContext;
             _dbSet = _dbContext.Set<T>();
         }
         public void Add(T entity)
@@ -37,9 +37,13 @@ namespace Farm.Data.Repository
             _dbSet.Remove(GetById(id));
         }
 
-        IEnumerable<T> IRepository<T>.GetAll()
+        List<T> IRepository<T>.GetAll()
         {
             return _dbSet.ToList();
+        }
+        public void Update(T entity)
+        {
+            _dbContext.Entry(entity).State = EntityState.Modified;
         }
     }
 }

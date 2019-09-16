@@ -12,7 +12,6 @@ namespace Farm.Data
     /// </summary>
     public interface IUnitOfWork:IDisposable
     {
-        ICowsRepository CowsRepository { get; }
-        int Complete();
+        int Commit();
     }
 }

@@ -136,21 +136,73 @@ $("[data-toggle='asyncswitch']", 'body').bootstrapSwitch({
     labelWidth: 25,
     handleWidth: 30
 });
-$("[data-toggle='asyncswitch']", 'body').on('switchChange.bootstrapSwitch', function (e) {
-    //var relatedSwitch = $(this);
-    //$.ajax({
-    //    url: $(this).data("url"),
-    //    type: "POST",
-    //    success: function (result) {
-    //        if (relatedSwitch.data("reload")) {
-    //            location.reload();
-    //        }
-    //        toastr.success(successMessage);
-    //    },
-    //    error: function (result) {
-    //        relatedSwitch.bootstrapSwitch('toggleState', !relatedSwitch.bootstrapSwitch('state'));
-    //        toastr.error(errorMessage);
-    //    }
-    //});
-    alert('hi')
+//$("[data-toggle='asyncswitch']", 'body').on('switchChange.bootstrapSwitch', function (e) {
+//    //var relatedSwitch = $(this);
+//    //$.ajax({
+//    //    url: $(this).data("url"),
+//    //    type: "POST",
+//    //    success: function (result) {
+//    //        if (relatedSwitch.data("reload")) {
+//    //            location.reload();
+//    //        }
+//    //        toastr.success(successMessage);
+//    //    },
+//    //    error: function (result) {
+//    //        relatedSwitch.bootstrapSwitch('toggleState', !relatedSwitch.bootstrapSwitch('state'));
+//    //        toastr.error(errorMessage);
+//    //    }
+//    //});
+   
+//});
+$('[data-toggle="confirmation"]', 'body').confirmation({
+    singleton: true,
+    popout: true,
+    placement: 'left',
+    title: 'Emin Misiniz?',
+    btnOkClass: 'btn btn-success btn-xs',
+    btnOkLabel: 'Evet',
+    btnCancelClass: 'btn btn-default btn-xs',
+    btnCancelLabel: 'Hayır'
+});
+
+$('[data-toggle="confirmation"]', 'body').confirmation({
+    singleton: true,
+    popout: true,
+    placement: 'left',
+    title: 'Emin Misiniz?',
+    btnOkClass: 'btn btn-success btn-xs',
+    btnOkLabel: 'Evet',
+    btnCancelClass: 'btn btn-default btn-xs',
+    btnCancelLabel: 'Hayır'
+
+}
+).on('confirm.bs.confirmation', function () {
+    var url = $(this).data("url");
+    var row = $(this).closest("tr");
+    if (url) {
+        var reload = $(this).data("reload");
+        var removeRow = $(this).data("remove-row");
+        $.ajax({
+            url: url,
+            type: "POST",
+            success: function (result) {
+                if (reload) {
+                    location.reload();
+                } else {
+                    if (removeRow) {
+                        executeFunctionByName(removeRow, row);
+                    } else {
+                        row.remove();
+                    }
+                }
+                $('.tooltip ').remove();
+                //toastr.success('Silindi!');
+            },
+            error: function (result) {
+                document.location = errorPage;
+            }
+        });
+    }
+}).on('cancel.bs.confirmation', function () {
+    $('.tooltip ').remove();
 });

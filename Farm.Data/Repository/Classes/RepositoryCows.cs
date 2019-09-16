@@ -11,7 +11,6 @@ namespace Farm.Data.Repository
 {
     public class RepositoryCows : RepositoryBase<Cow>,ICowsRepository
     {
-        public  MainContext mainContext { get { return _dbContext as MainContext; } } // _dbContext'i bize MainContext'e cast ediyor.
         private DbSet<Cow> _cowDbSet;
         public RepositoryCows(MainContext mainContext):base(mainContext)// RepositoryBase'i miras aldığım için bir context tanımlamam lazım.
         {
