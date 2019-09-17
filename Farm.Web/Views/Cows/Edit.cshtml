@@ -1,5 +1,28 @@
 ﻿@model CowsViewModel
 @using (Html.BeginForm("Edit", "Cows", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
-    @Html.Partial("_CreateOrEdit")
+    <section>
+        <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+
+                        @Html.Partial("_CreateOrEdit")
+
+                    </div>
+                    @*<div class="modal-footer">
+                            <button type="button" class="btn btn-link waves-effect">SAVE CHANGES</button>
+                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                        </div>*@
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <script type="text/javascript">
+        $(function () {
+            $('#defaultModal').modal();
+        });
+    </script>
 }

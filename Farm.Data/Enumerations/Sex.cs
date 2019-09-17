@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Farm.Data.Entities
+namespace Farm.Data.Enumerations
 {
-    public class Heifer: BaseEntity
+    public enum Sex
     {
-        public bool IsPregnant { get; set; }
+        Female=0,
+        Male=1
     }
 }

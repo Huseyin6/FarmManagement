@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Farm.Data;
 using Farm.Data.Entities;
+using Farm.Data.Enumerations;
 using Farm.Web.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,11 @@ namespace Farm.Web.Controllers
     public class CalvesController : Controller
     {
         UnitOfWork db = new UnitOfWork(new MainContext());
-        Mapper mapper = new Mapper(new MapperConfiguration(cfg => cfg.CreateMap<CalvesViewModel, Calf>()));
+        Mapper mapper = new Mapper(new MapperConfiguration(cfg => cfg.CreateMap<CalvesViewModel, Cattle>()));
 
         public ActionResult Index()
         {
-            return View(db.CalvesRepository.GetAll());
+            return View(db.Repository.GetMany(m=>m.CattleTypeId==(int)CattleTypes.Calf));
         }
         public ActionResult Create(){
             var model = new CalvesViewModel();
@@ -29,8 +30,8 @@ namespace Farm.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                Calf calf = mapper.Map<Calf>(model);
-                db.CalvesRepository.Add(calf);
+                Cattle calf = mapper.Map<Cattle>(model);
+                db.Repository.Add(calf);
                 db.Commit();
             }
             return View(model);

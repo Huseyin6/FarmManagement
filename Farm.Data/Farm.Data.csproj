@@ -81,28 +81,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\BaseEntity.cs" />
-    <Compile Include="Entities\Calf.cs" />
-    <Compile Include="Entities\Cow.cs" />
+    <Compile Include="Entities\Cattle.cs" />
+    <Compile Include="Entities\CattleType.cs" />
     <Compile Include="Entities\Expense.cs" />
     <Compile Include="Entities\ExpenseType.cs" />
     <Compile Include="Entities\FinansalBaseEntity.cs" />
-    <Compile Include="Entities\Heifer.cs" />
     <Compile Include="Entities\Income.cs" />
     <Compile Include="Entities\IncomeType.cs" />
     <Compile Include="Entities\State.cs" />
-    <Compile Include="Entities\Steer.cs" />
+    <Compile Include="Enumerations\CattleTypes.cs" />
+    <Compile Include="Enumerations\Sex.cs" />
     <Compile Include="IUnitOfWork.cs" />
-    <Compile Include="Repository\Classes\RepositoryCalves.cs" />
-    <Compile Include="Repository\Classes\RepositoryHeifers.cs" />
-    <Compile Include="Repository\Classes\RepositorySteers.cs" />
-    <Compile Include="Repository\Interfaces\ICalvesRepository.cs" />
     <Compile Include="Repository\Interfaces\IRepository.cs" />
-    <Compile Include="Repository\Interfaces\ICowsRepository.cs" />
     <Compile Include="MainContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\Classes\RepositoryBase.cs" />
-    <Compile Include="Repository\Classes\RepositoryCows.cs" />
     <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>

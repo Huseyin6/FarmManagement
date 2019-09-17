@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,13 +38,20 @@ namespace Farm.Data.Repository
             _dbSet.Remove(GetById(id));
         }
 
-        List<T> IRepository<T>.GetAll()
-        {
-            return _dbSet.ToList();
-        }
+       
         public void Update(T entity)
         {
             _dbContext.Entry(entity).State = EntityState.Modified;
+        }
+
+        public List<T> GetMany(Expression<Func<T, bool>> where = null)
+        {
+            return (where == null ? _dbSet.ToList() : _dbSet.Where(where).ToList());
+        }
+
+        public List<T> GetAll()
+        {
+            return _dbSet.ToList();
         }
     }
 }

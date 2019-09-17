@@ -2,12 +2,6 @@
  * ©2008-2015 SpryMedia Ltd - datatables.net/license
  */
 
-/*
- * ******************************************************************************
- *  DİKKAT: ÖZELLEŞTİRİLMİŞ VERSİYON (Eklemeleri Customize diye aratabilirsiniz)
- * ******************************************************************************
- */
-
 /**
  * @summary     DataTables
  * @description Paginate, search and order HTML tables
@@ -1639,16 +1633,8 @@
 		 *  @param {string} val string to escape
 		 *  @returns {string} escaped string
 		 */
-        escapeRegex: function (val) {
-			//return val.replace( _re_escape_regex, '\\$1' );
-
-            /* Customize: Jquery Datatables Türkçe Karakter Sorun Çözümü */
-            var letters = { "İ": "[İi]", "I": "[Iı]", "Ş": "[Şş]", "Ğ": "[Ğğ]", "Ü": "[Üü]", "Ö": "[Öö]", "Ç": "[Çç]", "i": "[İi]", "ı": "[Iı]", "ş": "[Şş]", "ğ": "[Ğğ]", "ü": "[Üü]", "ö": "[Öö]", "ç": "[Çç]" };
-            var acEscape = ['/', '.', '*', '+', '?', '|', '(', ')', '[', ']', '{', '}', '\\', '$', '^', '-'];
-            var reReplace = new RegExp('(\\' + acEscape.join('|\\') + ')', 'g');
-            val = val.replace(reReplace, '\\$1');
-
-            return val.replace(/(([İIŞĞÜÇÖiışğüçö]))/g, function (letter) { return letters[letter]; });
+		escapeRegex: function ( val ) {
+			return val.replace( _re_escape_regex, '\\$1' );
 		}
 	};
 	
@@ -4456,7 +4442,15 @@
 		return new RegExp( search, caseInsensitive ? 'i' : '' );
 	}
 	
-    var _fnEscapeRegex = DataTable.util.escapeRegex;
+	
+	/**
+	 * Escape a string such that it can be used in a regular expression
+	 *  @param {string} sVal string to escape
+	 *  @returns {string} escaped string
+	 *  @memberof DataTable#oApi
+	 */
+	var _fnEscapeRegex = DataTable.util.escapeRegex;
+	
 	var __filter_div = $('<div>')[0];
 	var __filter_div_textContent = __filter_div.textContent !== undefined;
 	
@@ -9365,7 +9359,6 @@
 	
 		return resolved.replace( '%d', plural ); // nb: plural might be undefined,
 	} );
-
 	/**
 	 * Version string for plug-ins to check compatibility. Allowed format is
 	 * `a.b.c-d` where: a:int, b:int, c:int, d:string(dev|beta|alpha). `d` is used
@@ -14362,7 +14355,7 @@
 		"sSortColumn": "sorting_", /* Note that an int is postfixed for the sorting order */
 	
 		/* Filtering */
-		"sFilterInput": "form-control",
+		"sFilterInput": "",
 	
 		/* Page length */
 		"sLengthSelect": "",

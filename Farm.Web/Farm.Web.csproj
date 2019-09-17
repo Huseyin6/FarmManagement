@@ -212,11 +212,6 @@
     <Content Include="Content\chartjs\Chart.js" />
     <Content Include="Content\chartjs\Chart.min.js" />
     <Content Include="Content\confirmation\confirmation.js" />
-    <Content Include="Content\datatable\bootstrap-table.css" />
-    <Content Include="Content\datatable\bootstrap-table.js" />
-    <Content Include="Content\datatable\dataTables.bootstrap.min.css" />
-    <Content Include="Content\datatable\js\datatables.js" />
-    <Content Include="Content\datatable\js\jquery.dataTables.js" />
     <Content Include="Content\favicon.ico" />
     <Content Include="Content\flot-charts\excanvas.js" />
     <Content Include="Content\flot-charts\excanvas.min.js" />
@@ -240,6 +235,25 @@
     <Content Include="Content\images\user-img-background.jpg" />
     <Content Include="Content\images\user.png" />
     <Content Include="Content\jquery-countto\jquery.countTo.js" />
+    <Content Include="Content\jquery-datatable\extensions\export\buttons.flash.min.js" />
+    <Content Include="Content\jquery-datatable\extensions\export\buttons.html5.min.js" />
+    <Content Include="Content\jquery-datatable\extensions\export\buttons.print.min.js" />
+    <Content Include="Content\jquery-datatable\extensions\export\dataTables.buttons.min.js" />
+    <Content Include="Content\jquery-datatable\extensions\export\jszip.min.js" />
+    <Content Include="Content\jquery-datatable\extensions\export\pdfmake.min.js" />
+    <Content Include="Content\jquery-datatable\extensions\export\vfs_fonts.js" />
+    <Content Include="Content\jquery-datatable\jquery.dataTables.js" />
+    <Content Include="Content\jquery-datatable\skin\bootstrap\css\dataTables.bootstrap.css" />
+    <Content Include="Content\jquery-datatable\skin\bootstrap\css\dataTables.bootstrap.min.css" />
+    <Content Include="Content\jquery-datatable\skin\bootstrap\images\favicon.ico" />
+    <Content Include="Content\jquery-datatable\skin\bootstrap\images\sort_asc.png" />
+    <Content Include="Content\jquery-datatable\skin\bootstrap\images\sort_asc_disabled.png" />
+    <Content Include="Content\jquery-datatable\skin\bootstrap\images\sort_both.png" />
+    <Content Include="Content\jquery-datatable\skin\bootstrap\images\sort_desc.png" />
+    <Content Include="Content\jquery-datatable\skin\bootstrap\images\sort_desc_disabled.png" />
+    <Content Include="Content\jquery-datatable\skin\bootstrap\js\dataTables.bootstrap.js" />
+    <Content Include="Content\jquery-datatable\skin\bootstrap\js\dataTables.bootstrap.min.js" />
+    <Content Include="Content\jquery-datatable\table\jquery-datatable.js" />
     <Content Include="Content\jquery-slimscroll\jquery.slimscroll.js" />
     <Content Include="Content\jquery-sparkline\jquery.sparkline.js" />
     <Content Include="Content\jquery-sparkline\src\base.js" />
@@ -264,8 +278,10 @@
     <Content Include="Content\jquery\jquery.js" />
     <Content Include="Content\jquery\jquery.min.js" />
     <Content Include="Content\js\admin.js" />
+    <Content Include="Content\js\basic-form-elements.js" />
     <Content Include="Content\js\demo.js" />
     <Content Include="Content\js\helpers.js" />
+    <Content Include="Content\js\modal.js" />
     <Content Include="Content\js\pages\cards\basic.js" />
     <Content Include="Content\js\pages\cards\colored.js" />
     <Content Include="Content\js\pages\charts\chartjs.js" />
@@ -398,6 +414,7 @@
     <Content Include="Content\bootstrap-select\js\bootstrap-select.js.map" />
     <Content Include="Content\jquery\jquery.min.map" />
     <Content Include="libman.json" />
+    <Content Include="Content\jquery-datatable\skin\bootstrap\images\Sorting icons.psd" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -415,7 +432,6 @@
     <Compile Include="Controllers\IncomeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SteersController.cs" />
-    <Compile Include="FarmWebViewPage.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

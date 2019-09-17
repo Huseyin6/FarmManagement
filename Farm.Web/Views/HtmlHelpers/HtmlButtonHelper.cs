@@ -12,7 +12,7 @@ namespace Farm.Web.Views.HtmlHelpers
         public static MvcHtmlString EditButton(this HtmlHelper html, string url, string buttonSize = null)
         {
             buttonSize = buttonSize ?? "xs";
-            var text = "Edit";
+            var text = "Düzenle";
             var builder = new StringBuilder();
             builder.AppendFormat($"<a class=\"btn btn-success btn-{buttonSize} editButton\" href=\"{url}\" >");
             builder.AppendFormat($"<span>{text}</span>");
@@ -21,7 +21,7 @@ namespace Farm.Web.Views.HtmlHelpers
         }
         public static MvcHtmlString DeleteButton(this HtmlHelper html, string url, string attribute = null)
         {
-            var text = "Delete";
+            var text = "Sil";
             var builder = new StringBuilder();
             builder.AppendFormat($"<a class=\"btn btn-danger btn-sm\" data-toggle=\"confirmation\" data-url=\"{url}\"{attribute}>");
             builder.AppendFormat($"<span data-toggle=\"tooltip\" data-placement=\"top\" title=\"{text}\">");
@@ -30,17 +30,22 @@ namespace Farm.Web.Views.HtmlHelpers
             builder.Append("</a>");
             return MvcHtmlString.Create(builder.ToString());
         }
-        public static MvcHtmlString SaveButton(this HtmlHelper html, string url, string attribute = null)
+        public static MvcHtmlString CancelButton(this HtmlHelper html, string url, string attribute = null)
         {
-            var text = "Save";
+            var text = "Vazgeç";
             var builder = new StringBuilder();
-            builder.AppendFormat($"<a class=\"btn btn-danger btn-sm\" data-toggle=\"confirmation\" data-url=\"{url}\"{attribute}>");
-            builder.AppendFormat($"<span data-toggle=\"tooltip\" data-placement=\"top\" title=\"{text}\">");
-            builder.AppendFormat("<i class=\"fa fa-trash-o fa-fw\"></i>");
-            builder.Append("</span>");
+            builder.AppendFormat($"<a href=\"{url}\" class=\"btn btn-danger btn-sm\">{text}");
+           
             builder.Append("</a>");
             return MvcHtmlString.Create(builder.ToString());
-
+        }
+        public static MvcHtmlString SaveButtons(this HtmlHelper html, string url)
+        {
+            var text = "Kaydet";
+            var builder = new StringBuilder();
+            builder.AppendFormat($"<button class=\"btn btn-primary btn-sm\">{text}");
+            builder.Append("</button>");
+            return MvcHtmlString.Create(builder.ToString());
         }
     }
 }

@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Farm.Data.Entities
 {
-    public class Calf :BaseEntity
-    {  
-        public int Sex { get; set; }
-        public bool DrinkMilk { get; set; } // Does He/She Drink Milk ?
+    public class CattleType
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+
     }
 }

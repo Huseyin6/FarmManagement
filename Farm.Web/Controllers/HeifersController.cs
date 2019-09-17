@@ -14,7 +14,7 @@ namespace Farm.Web.Controllers
         // GET: Heifers
         public ActionResult Index()
         {
-            return View(db.HeiferRepository.GetAll());
+            return View(db.Repository.GetAll());
         }
     }
 }

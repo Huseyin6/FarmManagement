@@ -14,7 +14,7 @@ namespace Farm.Web.Controllers
         // GET: Steers
         public ActionResult Index()
         {
-            return View(db.SteerRepository.GetAll());
+            return View(db.Repository.GetAll());
         }
     }
 }

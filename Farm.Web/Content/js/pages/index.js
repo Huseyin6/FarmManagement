@@ -13,11 +13,42 @@
     //initDonutChart();
     initSparkline();
     $(document).ready(function () {
-        $('#cow-list-table').DataTable({
-            sDom: "<'row datatables-header form-inline'<'col-sm-12 col-md-6'><'col-sm-12 col-md-6'f>r><'table-responsive't><'row datatables-footer'<'col-sm-12 col-md-4 col-md-offset-4 'p>>",
+        $('.cow-list-table').DataTable({
+            language: {
+                "sDecimal": ",",
+                "sEmptyTable": "Tabloda herhangi bir veri mevcut değil",
+                "sInfo": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
+                "sInfoEmpty": "Kayıt yok",
+                "sInfoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "Sayfada _MENU_ kayıt göster",
+                "sLoadingRecords": "Yükleniyor...",
+                "sProcessing": "İşleniyor...",
+                "sSearch": "Ara:",
+                "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                "oPaginate": {
+                    "sFirst": "İlk",
+                    "sLast": "Son",
+                    "sNext": "Sonraki",
+                    "sPrevious": "Önceki"
+                },
+                "oAria": {
+                    "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                    "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                },
+                "select": {
+                    "rows": {
+                        "_": "%d kayıt seçildi",
+                        "0": "",
+                        "1": "1 kayıt seçildi"
+                    }
+                }
+            },
+            sDom: "<'row datatables-header form-inline'<'col-sm-12 col-md-6'><'col-sm-12 col-md-6'f>r><'table-responsive't><'row datatables-footer'<'col-sm-12 col-md-6 col-md-offset-6 'p>>",
             sort: false,
             info: false,
-            "iDisplayLength": 15,
+            "iDisplayLength": 10,
             "pagingType": "simple_numbers"
         });
         $('#cow-list-table_paginate').css('text-align', 'center');
@@ -205,4 +236,66 @@ $('[data-toggle="confirmation"]', 'body').confirmation({
     }
 }).on('cancel.bs.confirmation', function () {
     $('.tooltip ').remove();
-});
+    });
+function showDialog() {
+    var size = $(this).data("asyncmodal-size");
+    var reload = $(this).data("asyncmodal-reload");
+    var successMethod = $(this).data("asyncmodal-callback");
+
+    if (size != null) {
+        $('#asyncmodal-dialog').addClass("modal-" + size);
+    }
+    $('#asyncmodal-content').html(busyIndicator);
+    $('#asyncmodal-container').modal('show');
+    $('#asyncmodal-container').on('hidden.bs.modal', function (event) {
+        if (event.target.id == 'asyncmodal-container') {
+            $('#asyncmodal-content').empty();
+        }
+    })
+    $('#asyncmodal-content').load(this.href, function (response, status, xhr) {
+        if (status == "error") {
+            document.location = errorPage;
+        }
+
+        bindForm(this, reload, successMethod);
+    });
+
+    return false;
+}
+
+function bindForm(dialog, reload, successMethod) {
+    init('#asyncmodal-content');
+    $.validator.unobtrusive.parse('form');
+    $('form', dialog).submit(function () {
+        $.ajax({
+            url: this.action,
+            type: this.method,
+            data: new FormData(this), //$(this).serialize(),
+            processData: false,
+            contentType: false,
+            beforeSend: function () {
+                $('#asyncmodal-content').html(busyIndicator);
+            },
+            success: function (result) {
+                if (result.success) {
+                    $('#asyncmodal-container').modal('hide');
+                    if (reload == true) {
+                        location.reload(); //refresh
+                    }
+                    else {
+                        if (successMethod) {
+                            executeFunctionByName(successMethod, window, result);
+                        }
+                    }
+                } else {
+                    $('#asyncmodal-content').html(result);
+                    bindForm(dialog, reload, successMethod);
+                }
+            }
+        })
+            .fail(function () {
+                document.location = errorPage;
+            });
+        return false;
+    });
+}

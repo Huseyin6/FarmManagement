@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Farm.Data.Entities.Calf>
+﻿@model IEnumerable<Farm.Data.Entities.Cattle>
 @{
     ViewBag.Title = "Calves";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -31,12 +31,12 @@
     <section class="panel panel-featured panel-default">
         <div class="panel-heading">
             <div class="text-right">
-                <a href="@Url.Action("Create","Cows")"><button class="btn btn-primary">Yeni Kayıt</button></a>
+                <a href="@Url.Action("Create","Calves")"><button class="btn btn-primary">Yeni Kayıt</button></a>
             </div>
         </div>
         <div class="panel-body">
             <div class="table-responsive">
-                <table class="table table-striped table-hover" id="cow-list-table">
+                <table class="table table-striped table-hover table-bordered cow-list-table" >
                     <thead>
                         <tr role="row">
                             <th class="sorting_disabled" rowspan="1" colspan="1">Küpe No</th>
