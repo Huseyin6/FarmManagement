@@ -19,6 +19,8 @@ namespace Farm.Data.Entities
         public int CattleTypeId { get; set; }
         public bool IsPregnant { get; set; }
         public bool IsLactation { get; set; }
+        [UIHint("SexView")]
+        [Display(Name="Cinsiyet")]
         public int Sex { get; set; }
         public bool DrinkMilk { get; set; } // Does He/She Drink Milk (this prop is only calves) ?
 

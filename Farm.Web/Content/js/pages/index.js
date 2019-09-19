@@ -45,9 +45,9 @@
                     }
                 }
             },
-            sDom: "<'row datatables-header form-inline'<'col-sm-12 col-md-6'><'col-sm-12 col-md-6'f>r><'table-responsive't><'row datatables-footer'<'col-sm-12 col-md-6 col-md-offset-6 'p>>",
+            sDom: "<'row datatables-header form-inline'<'col-sm-12 col-md-6'i><'col-sm-12 col-md-6'f>r><'table-responsive't><'row datatables-footer'<'col-sm-12 col-md-6 col-md-offset-6 'p>>",
             sort: false,
-            info: false,
+            info: true,
             "iDisplayLength": 10,
             "pagingType": "simple_numbers"
         });

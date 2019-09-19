@@ -3257,7 +3257,7 @@ section.content {
     }
 
     .btn:not(.btn-link):not(.btn-circle) i {
-        font-size: 20px;
+        /*font-size: 20px;*/
         position: relative;
         top: 3px;
     }
@@ -11058,4 +11058,7 @@ html.ie11 .dropdown-menu ul.menu li a {
 
 html.ie11 .bs-searchbox .form-control {
     width: 90%;
+}
+#state-select-list > .bootstrap-select {
+    width: 100% !important;
 }

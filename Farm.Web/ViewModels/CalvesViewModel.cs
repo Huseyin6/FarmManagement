@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Farm.Web.ViewModels
 {
@@ -10,5 +11,6 @@ namespace Farm.Web.ViewModels
     {
         public int Sex { get; set; }
         public bool DrinkMilk { get; set; } // Does He/She Drink Milk ?
+        public SelectList SexSelectList { get; set; }
     }
 }

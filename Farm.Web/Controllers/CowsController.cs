@@ -15,7 +15,7 @@ namespace Farm.Web.Controllers
     public class CowsController : Controller
     {
         UnitOfWork db = new UnitOfWork(new MainContext());
-        Mapper mapper = new Mapper(new MapperConfiguration(cfg => cfg.CreateMap<CowsViewModel, Cattle>()));  
+        Mapper mapper = new Mapper(new MapperConfiguration(cfg => cfg.CreateMap<CowsViewModel, Cattle>().ReverseMap()));  
         
         SelectList selectList= new SelectList(new List<SelectListItem>
             {
@@ -27,25 +27,46 @@ namespace Farm.Web.Controllers
                 },
                 new SelectListItem
                 {
-                    Text = "Ölü",
+                    Text = "Satıldı",
                     Value = "2"
                 },
                 new SelectListItem
                 {
-                    Text = "Satıldı",
+                    Text = "Ölü",
                     Value = "3",
                 }
             },"Value","Text");
  
         // GET: Cows
-        public ActionResult Index()
+        public ActionResult Index(int? state, bool? IsPregnant, bool? IsLactation)
         {
-            return View(db.Repository.GetMany(m=>m.CattleTypeId==(int)CattleTypes.Cow));
+            if(state.HasValue ){
+                if(IsPregnant == null && IsLactation == null){
+                    return View(db.Repository.GetMany(m => m.CattleTypeId == (int)CattleTypes.Cow && m.StateId == state));
+                }
+                else if(IsPregnant.HasValue){
+                    return View(db.Repository.GetMany(m => m.CattleTypeId == (int)CattleTypes.Cow && m.StateId == state && m.IsPregnant));
+                }
+                else if (IsLactation.HasValue)
+                {
+                    return View(db.Repository.GetMany(m => m.CattleTypeId == (int)CattleTypes.Cow && m.StateId == state && m.IsLactation));
+                }
+
+            }
+            else if(state == null && IsPregnant==true && IsLactation == null){
+                return View(db.Repository.GetMany(m => m.CattleTypeId == (int)CattleTypes.Cow && m.IsPregnant));
+            }
+            else if (state == null && IsPregnant == null && IsLactation == true)
+            {
+                return View(db.Repository.GetMany(m => m.CattleTypeId == (int)CattleTypes.Cow && m.IsLactation));
+            }
+            return View(db.Repository.GetMany(m => m.CattleTypeId == (int)CattleTypes.Cow));
         }
         public ActionResult Create()
         {
             var model = new CowsViewModel();
             model.StateSelectList = selectList;
+            model.BirthDate = DateTime.Today;
             return View(model);
         }
         [HttpPost]
@@ -74,10 +95,12 @@ namespace Farm.Web.Controllers
         [HttpPost]
         public ActionResult Edit(int id, CowsViewModel model)
         {
+            model.StateSelectList = selectList;
             if (ModelState.IsValid)
             {
                 Cattle cow = mapper.Map<Cattle>(model);
                 cow.Id = id;
+                cow.CattleTypeId = (int)CattleTypes.Cow;
                 db.Repository.Update(cow);
                 db.Commit();
                 return RedirectToAction("Index", "Cows");
