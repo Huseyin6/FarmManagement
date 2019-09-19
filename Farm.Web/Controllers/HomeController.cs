@@ -11,20 +11,11 @@ namespace Farm.Web.Controllers
 {
     public class HomeController : Controller
     {
-       
+        UnitOfWork unitOfWork = new UnitOfWork(new MainContext());
+
         public ActionResult Index()
         {
-            using (var context=new MainContext()){
-                var test = new Test()
-                {
-                    Name = "tset"
-                };
-                context.Tests.Add(test);
-                context.SaveChanges();
-
-                var list = context.Tests;
-                return View(list.ToList());
-            }
+            return View();
         }
     }
 }

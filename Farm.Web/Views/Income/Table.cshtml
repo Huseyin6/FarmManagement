@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Table";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -9,7 +8,7 @@
 
     <section class="panel panel-featured panel-featured-info panel-default">
         <div class="panel-body" id="filter-panel">
-            @using (Html.BeginForm("Table", "Income", FormMethod.Get, new { @class = "form-inline", style = "margin:5px 0px" }))
+            @*@using (Html.BeginForm("Table", "Income", FormMethod.Get, new { @class = "form-inline", style = "margin:5px 0px" }))
             {
                 @*<div class="form-group " id="filter-panel">
                         <label class="filter-label " for="State">Gelir Türü</label>
@@ -25,8 +24,8 @@
                     </div>
                     <div class="form-group  pull-right">
                         <button type="submit" class="btn btn-info btn-filter" data-loading-text="@Localize("Searching")">@Localize("Filter")</button>
-                    </div>*@
-            }
+                    </div>
+            }*@
         </div>
     </section>
     <section class="panel panel-featured panel-default">
@@ -79,10 +78,4 @@
         </div>
     </section>
 </div>
-
-<script type="text/javascript">
-    function deneme(x) {
-        $(x).modal('show');
-    }
-</script>
 

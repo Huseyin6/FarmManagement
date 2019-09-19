@@ -12,6 +12,48 @@
     //initRealTimeChart();
     //initDonutChart();
     initSparkline();
+    $(document).ready(function () {
+        $('.cow-list-table').DataTable({
+            language: {
+                "sDecimal": ",",
+                "sEmptyTable": "Tabloda herhangi bir veri mevcut değil",
+                "sInfo": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
+                "sInfoEmpty": "Kayıt yok",
+                "sInfoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "Sayfada _MENU_ kayıt göster",
+                "sLoadingRecords": "Yükleniyor...",
+                "sProcessing": "İşleniyor...",
+                "sSearch": "Ara:",
+                "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                "oPaginate": {
+                    "sFirst": "İlk",
+                    "sLast": "Son",
+                    "sNext": "Sonraki",
+                    "sPrevious": "Önceki"
+                },
+                "oAria": {
+                    "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                    "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                },
+                "select": {
+                    "rows": {
+                        "_": "%d kayıt seçildi",
+                        "0": "",
+                        "1": "1 kayıt seçildi"
+                    }
+                }
+            },
+            sDom: "<'row datatables-header form-inline'<'col-sm-12 col-md-6'i><'col-sm-12 col-md-6'f>r><'table-responsive't><'row datatables-footer'<'col-sm-12 col-md-6 col-md-offset-6 'p>>",
+            sort: false,
+            info: true,
+            "iDisplayLength": 10,
+            "pagingType": "simple_numbers"
+        });
+        $('#cow-list-table_paginate').css('text-align', 'center');
+
+    });
 });
 
 var realtime = 'on';
@@ -112,4 +154,148 @@ function getRandomData() {
     }
 
     return res;
+}
+
+$('.switch', 'body').bootstrapSwitch({
+    onText: 'Evet',
+    offText: 'Hayır',
+    labelWidth: 30,
+    handleWidth: 40
+});
+$("[data-toggle='asyncswitch']", 'body').bootstrapSwitch({
+    size: 'small',
+    labelWidth: 25,
+    handleWidth: 30
+});
+//$("[data-toggle='asyncswitch']", 'body').on('switchChange.bootstrapSwitch', function (e) {
+//    //var relatedSwitch = $(this);
+//    //$.ajax({
+//    //    url: $(this).data("url"),
+//    //    type: "POST",
+//    //    success: function (result) {
+//    //        if (relatedSwitch.data("reload")) {
+//    //            location.reload();
+//    //        }
+//    //        toastr.success(successMessage);
+//    //    },
+//    //    error: function (result) {
+//    //        relatedSwitch.bootstrapSwitch('toggleState', !relatedSwitch.bootstrapSwitch('state'));
+//    //        toastr.error(errorMessage);
+//    //    }
+//    //});
+   
+//});
+$('[data-toggle="confirmation"]', 'body').confirmation({
+    singleton: true,
+    popout: true,
+    placement: 'left',
+    title: 'Emin Misiniz?',
+    btnOkClass: 'btn btn-success btn-xs',
+    btnOkLabel: 'Evet',
+    btnCancelClass: 'btn btn-default btn-xs',
+    btnCancelLabel: 'Hayır'
+});
+
+$('[data-toggle="confirmation"]', 'body').confirmation({
+    singleton: true,
+    popout: true,
+    placement: 'left',
+    title: 'Emin Misiniz?',
+    btnOkClass: 'btn btn-success btn-xs',
+    btnOkLabel: 'Evet',
+    btnCancelClass: 'btn btn-default btn-xs',
+    btnCancelLabel: 'Hayır'
+
+}
+).on('confirm.bs.confirmation', function () {
+    var url = $(this).data("url");
+    var row = $(this).closest("tr");
+    if (url) {
+        var reload = $(this).data("reload");
+        var removeRow = $(this).data("remove-row");
+        $.ajax({
+            url: url,
+            type: "POST",
+            success: function (result) {
+                if (reload) {
+                    location.reload();
+                } else {
+                    if (removeRow) {
+                        executeFunctionByName(removeRow, row);
+                    } else {
+                        row.remove();
+                    }
+                }
+                $('.tooltip ').remove();
+                //toastr.success('Silindi!');
+            },
+            error: function (result) {
+                document.location = errorPage;
+            }
+        });
+    }
+}).on('cancel.bs.confirmation', function () {
+    $('.tooltip ').remove();
+    });
+function showDialog() {
+    var size = $(this).data("asyncmodal-size");
+    var reload = $(this).data("asyncmodal-reload");
+    var successMethod = $(this).data("asyncmodal-callback");
+
+    if (size != null) {
+        $('#asyncmodal-dialog').addClass("modal-" + size);
+    }
+    $('#asyncmodal-content').html(busyIndicator);
+    $('#asyncmodal-container').modal('show');
+    $('#asyncmodal-container').on('hidden.bs.modal', function (event) {
+        if (event.target.id == 'asyncmodal-container') {
+            $('#asyncmodal-content').empty();
+        }
+    })
+    $('#asyncmodal-content').load(this.href, function (response, status, xhr) {
+        if (status == "error") {
+            document.location = errorPage;
+        }
+
+        bindForm(this, reload, successMethod);
+    });
+
+    return false;
+}
+
+function bindForm(dialog, reload, successMethod) {
+    init('#asyncmodal-content');
+    $.validator.unobtrusive.parse('form');
+    $('form', dialog).submit(function () {
+        $.ajax({
+            url: this.action,
+            type: this.method,
+            data: new FormData(this), //$(this).serialize(),
+            processData: false,
+            contentType: false,
+            beforeSend: function () {
+                $('#asyncmodal-content').html(busyIndicator);
+            },
+            success: function (result) {
+                if (result.success) {
+                    $('#asyncmodal-container').modal('hide');
+                    if (reload == true) {
+                        location.reload(); //refresh
+                    }
+                    else {
+                        if (successMethod) {
+                            executeFunctionByName(successMethod, window, result);
+                        }
+                    }
+                } else {
+                    $('#asyncmodal-content').html(result);
+                    bindForm(dialog, reload, successMethod);
+                }
+            }
+        })
+            .fail(function () {
+                document.location = errorPage;
+            });
+        return false;
+    });
 }

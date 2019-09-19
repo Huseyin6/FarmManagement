@@ -2442,7 +2442,7 @@ table th[class*="col-"] {
 }
 .table-responsive {
   min-height: .01%;
-  overflow-x: auto;
+  /*overflow-x: auto;*/
 }
 @media screen and (max-width: 767px) {
   .table-responsive {
@@ -2982,7 +2982,7 @@ select[multiple].input-lg {
 }
 @media (min-width: 768px) {
   .form-horizontal .control-label {
-    padding-top: 7px;
+    padding-top: 13px;
     margin-bottom: 0;
     text-align: right;
   }

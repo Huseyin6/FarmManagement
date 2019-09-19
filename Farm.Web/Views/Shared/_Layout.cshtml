@@ -11,12 +11,20 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 
     <!-- Bootstrap Core Css -->
     <link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+    <link href="~/Content/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" />
+    <!-- BootstrapSwitch  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/css/bootstrap2/bootstrap-switch.min.css" />
+    <!-- FontAwesome-->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <!-- JQuery DataTable Css -->
+    <link href="~/Content/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.min.css" rel="stylesheet">
 
+    <!--Bootstrap Datepicker-->
+    <link href="~/Content/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" />
 
     <!-- Waves Effect Css -->
     <link href="~/Content/node-waves/waves.css" rel="stylesheet" />
@@ -29,13 +37,16 @@
 
     <!-- Custom Css -->
     <link href="~/Content/style.css" rel="stylesheet">
+    <link href="~/Content/Site.css" rel="stylesheet">
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="~/Content/all-themes.css" rel="stylesheet" />
 
+    <!-- Jquery Core Js -->
+    <script src="~/Content/jquery/jquery.min.js"></script>
 </head>
 
-<body class="theme-light-blue">
+<body class="theme-deep-purple">
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
@@ -75,8 +86,8 @@
                     <img src="~/Content/images/user.png" width="48" height="48" alt="User" /> @* Resim veritabanında kayıtlı olacak. kullanıcı profil resmi. *@
                 </div>
                 <div class="info-container">
-                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</div>
-                    <div class="email">john.doe@example.com</div> @* Mail'de veritabanında olacak. kullanıcı tablosunda tutulacak. *@
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Huseyin</div>
+                    <div class="email">huseyin.simsek@example.com</div> @* Mail'de veritabanında olacak. kullanıcı tablosunda tutulacak. *@
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
@@ -94,57 +105,57 @@
                     <li class="header">FİNANSAL İŞLEMLER</li>
                     <li class="active">
                         <a href="@Url.Action("Index","Home")">
-                            <i class="material-icons">home</i>
-                            <span>Home</span>
+                            <i class="material-icons" style="color:#FF6347">home</i>
+                            <span style="color:#FF6347">Home</span>
                         </a>
                     </li>
                     <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">layers</i>
-                            <span>Gelir</span>
+                        <a href="javascript:void(0);" class="menu-toggle" style="color:#1E90FF">
+                            <i class="material-icons">trending_up</i>
+                            <span style="color:#1E90FF">Gelir</span>
                         </a>
 
                         <ul class="ml-menu">
                             <li>
-                                <a href="@Url.Action("Table","Income")">Tablo</a>
+                                <a href="@Url.Action("Table","Income")" style="color:#1E90FF">Tablo</a>
                             </li>
                             <li>
-                                <a href="@Url.Action("Statistic","Income")">İstatistik</a>
+                                <a href="@Url.Action("Statistic","Income")" style="color:#1E90FF">İstatistik</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">layers</i>
-                            <span>Gider</span>
+                        <a href="javascript:void(0);" class="menu-toggle" style="color:#DC143C">
+                            <i class="material-icons">trending_down</i>
+                            <span style="color:#DC143C">Gider</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="@Url.Action("Table","Expense")">Tablo</a>
+                                <a href="@Url.Action("Table","Expense")" style="color:#DC143C">Tablo</a>
                             </li>
                             <li>
-                                <a href="@Url.Action("Statistic","Expense")">İstatistik</a>
+                                <a href="@Url.Action("Statistic","Expense")" style="color:#DC143C">İstatistik</a>
                             </li>
                         </ul>
                     </li>
                     <li class="header">YÖNETİMSEL İŞLEMLER</li>
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">layers</i>
+                            <i class="material-icons">settings</i>
                             <span>Hayvan Yönetimi</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="@Url.Action("Cows","AnimalManagement")">İnek</a>
+                                <a href="@Url.Action("Index","Cows")">İnek</a>
                             </li>
                             <li>
-                                <a href="@Url.Action("Calves","AnimalManagement")">Buzağı</a>
+                                <a href="@Url.Action("Index","Calves")">Buzağı</a>
                             </li>
                             <li>
-                                <a href="@Url.Action("Heifers","AnimalManagement")">Düve</a>
+                                <a href="@Url.Action("Index","Heifers")">Düve</a>
                             </li>
                             <li>
-                                <a href="@Url.Action("Steers","AnimalManagement")">Dana</a>
+                                <a href="@Url.Action("Index","Steers")">Dana</a>
                             </li>
                         </ul>
                     </li>
@@ -170,36 +181,11 @@
             @RenderBody()
         </div>
     </section>
-    <div id="ex1" class="modal">
-        @using (Html.BeginForm("Create", "AnnouncementManagement", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-        {
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="form-group">
-                        @Html.Label("Adı", new { @class = "col-lg-3 col-xl-2 control-label " })
-                        <div class="col-md-2">
-                            tect
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="text-right" style="margin-bottom:15px">
-                <button class="btn btn-primary" type="submit">Kaydet</button>
-                <a href="#" rel="modal:close" class="btn btn-danger">Geri</a>
-            </div>
-        }
-
-    </div>
-    <!-- Jquery Core Js -->
-    <script src="~/Content/jquery/jquery.min.js"></script>
-
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
     <!-- Bootstrap Core Js -->
     <script src="~/Content/bootstrap/js/bootstrap.js"></script>
+    <script src="~/Content/bootstrap-select/js/bootstrap-select.min.js"></script>
 
-    <!-- Select Plugin Js -->
-    <script src="~/Content/bootstrap-select/js/bootstrap-select.js"></script>
 
     <!-- Slimscroll Plugin Js -->
     <script src="~/Content/jquery-slimscroll/jquery.slimscroll.js"></script>
@@ -207,34 +193,37 @@
     <!-- Waves Effect Plugin Js -->
     <script src="~/Content/node-waves/waves.js"></script>
 
+    <!-- Jquery DataTable Plugin Js -->
+    <script src="~/Content/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="~/Content/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+
     <!-- Jquery CountTo Plugin Js -->
     <script src="~/Content/jquery-countto/jquery.countTo.js"></script>
 
     <!-- Morris Plugin Js -->
     <script src="~/Content/raphael/raphael.min.js"></script>
-    @*<script src="~/Content/morrisjs/morris.js"></script>*@
 
     <!-- ChartJs -->
     <script src="~/Content/chartjs/Chart.bundle.js"></script>
 
-    <!-- Flot Charts Plugin Js -->
-    @*<script src="~/Content/flot-charts/jquery.flot.js"></script>
-        <script src="~/Content/flot-charts/jquery.flot.resize.js"></script>
-        <script src="~/Content/flot-charts/jquery.flot.pie.js"></script>
-        <script src="~/Content/flot-charts/jquery.flot.categories.js"></script>
-        <script src="~/Content/flot-charts/jquery.flot.time.js"></script>*@
 
+    <script src="~/Content/momentjs/moment.js"></script>
+    
+    <!-- Bootstrap Datepicker-->
+    <script src="~/Content/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
+    <script src="~/Content/bootstrap-datepicker/locales/bootstrap-datepicker.tr.min.js"></script>
     <!-- Sparkline Chart Plugin Js -->
     <script src="~/Content/jquery-sparkline/jquery.sparkline.js"></script>
+    <script src="~/Content/bootstrap-confirmation.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
     <!-- Custom Js -->
     <script src="~/Content/js/admin.js"></script>
+    <script src="~/Content/jquery-datatable/table/jquery-datatable.js"></script>
+    <script src="~/Content/js/pages/ui/modals.js"></script>
+    <script src="~/Content/js/pages/forms/basic-form-elements.js"></script>
     <script src="~/Content/js/pages/index.js"></script>
 
-    <!-- Demo Js -->
-    <script src="~/Content/js/demo.js"></script>
 </body>
 </html>

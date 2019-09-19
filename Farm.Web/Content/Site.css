@@ -15,4 +15,6 @@ select,
 textarea {
     max-width: 280px;
 }
-
+#bs_datepicker_container .input-group{
+    margin-bottom:0;
+}

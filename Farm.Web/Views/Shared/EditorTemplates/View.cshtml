@@ -1,0 +1,13 @@
+﻿@model DateTime?
+@{
+    var className = (string)ViewData["class"] ?? "datepicker";
+    var format = (string)ViewData["format"] ?? GetDateFormat(className);
+    format = string.Format("{{0:{0}}}",format);
+    bool isContinue = false;
+    ViewData["isContinue"].TryChangeType<bool>(out isContinue);
+    var placeholder = isContinue ? "Devam Ediyor" : "";
+}
+<div class="input-group date @className" >
+    @Html.TextBoxFor(m => m, format,  new { @class = "form-control", @readonly = "readonly", @placeholder = placeholder})
+    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+</div>
