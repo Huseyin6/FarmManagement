@@ -31,7 +31,6 @@ Value = "3",
 }
 <div class="row">
     <h3>İnekler</h3>
-
     <section class="panel panel-featured panel-featured-info panel-default">
         <div class="panel-body">
             @using (Html.BeginForm("Index", "Cows", FormMethod.Get, new { @class = "form-horizantal", style = "margin:5px 0px" }))
@@ -101,20 +100,16 @@ Value = "3",
                                     <td class="hidden-xs">
                                         @Html.CheckBoxFor(m => item.IsLactation, new { @class = "custom-control-input", @readonly = "readonly", data_toggle = "asyncswitch", data_on_text = "Evet", data_off_text = "Hayır", data_url = Url.Action("ChangeState", "Cows", new { id = item.Id }) })
                                     </td>
-
                                     <td class="text-center">
                                         @Html.EditButton(Url.Action("Edit", new { id = item.Id }), "sm")
                                         @Html.DeleteButton(Url.Action("Delete", new { id = item.Id }))
-
                                     </td>
                                 </tr>
                             }
                         }
                     </tbody>
                 </table>
-                @*@Html.Partial("_NoDataFound")*@
             </div>
         </div>
-
     </section>
 </div>

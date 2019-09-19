@@ -567,6 +567,9 @@
     <Content Include="Views\Heifers\Create.cshtml" />
     <Content Include="Views\Heifers\_CreateOrEdit.cshtml" />
     <Content Include="Views\Heifers\Edit.cshtml" />
+    <Content Include="Views\Steers\Create.cshtml" />
+    <Content Include="Views\Steers\Edit.cshtml" />
+    <Content Include="Views\Steers\_CreateOrEdit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
