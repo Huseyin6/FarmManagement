@@ -54,13 +54,13 @@ namespace Farm.Web.Controllers
 
             }
             else if(state == null && IsPregnant==true && IsLactation == null){
-                return View(db.Repository.GetMany(m => m.CattleTypeId == (int)CattleTypes.Cow && m.IsPregnant));
+                return View(db.Repository.GetMany(m => m.CattleTypeId == (int)CattleTypes.Cow && m.IsPregnant && m.StateId == 1));
             }
             else if (state == null && IsPregnant == null && IsLactation == true)
             {
-                return View(db.Repository.GetMany(m => m.CattleTypeId == (int)CattleTypes.Cow && m.IsLactation));
+                return View(db.Repository.GetMany(m => m.CattleTypeId == (int)CattleTypes.Cow && m.IsLactation && m.StateId == 1));
             }
-            return View(db.Repository.GetMany(m => m.CattleTypeId == (int)CattleTypes.Cow));
+            return View(db.Repository.GetMany(m => m.CattleTypeId == (int)CattleTypes.Cow && m.StateId==1));
         }
         public ActionResult Create()
         {

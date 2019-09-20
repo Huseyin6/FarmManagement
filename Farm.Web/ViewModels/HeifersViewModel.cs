@@ -8,5 +8,6 @@ namespace Farm.Web.ViewModels
     public class HeifersViewModel:BaseViewModel
     {
         public bool IsPregnant { get; set; }
+        public DateTime? PregnantDate { get; set; }
     }
 }

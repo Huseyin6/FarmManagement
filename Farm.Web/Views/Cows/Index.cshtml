@@ -1,33 +1,7 @@
 ﻿@model List<Farm.Data.Entities.Cattle>
 @{
     ViewBag.Title = "Cows";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    SelectList selectList = new SelectList(new List<SelectListItem>
-{
-new SelectListItem
-{
-Text = "Tümü",
-Value = null,
-Selected = true
-},
-new SelectListItem
-{
-Text = "Çiftlikte",
-Value = "1",
-Selected=true
-},
-new SelectListItem
-{
-Text = "Satıldı",
-Value = "2"
-},
-new SelectListItem
-{
-Text = "Ölü",
-Value = "3",
-}
-}
-    , "Value", "Text");
+    Layout = "~/Views/Shared/_Layout.cshtml";  
 }
 <div class="row">
     <h3>İnekler</h3>
@@ -35,14 +9,6 @@ Value = "3",
         <div class="panel-body">
             @using (Html.BeginForm("Index", "Cows", FormMethod.Get, new { @class = "form-horizantal", style = "margin:5px 0px" }))
             {
-                <div class="form-group">
-                    <label class="control-label" for="State" style="display:inline-block;float:left;padding:5px">Durum</label>
-                    <div class="col-md-1 form-inline">
-                        @Html.DropDownList("state", selectList, new { @class = "form-control autoWidth", style = "display:inline-block;float:left" })
-                    </div>
-                    <div class="col-md-1 form-inline">
-                    </div>
-                </div>
                 <div class="form-group">
                     <label class="control-label" for="IsPregnant" style="display:inline-block;float:left;padding:5px">Hamilelik Durumu</label>
                     <div class="col-md-2 form-inline">
@@ -77,7 +43,9 @@ Value = "3",
                             <th class="sorting_disabled" rowspan="1" colspan="1">Adı</th>
                             <th class="hidden-xs hidden-sm sorting_disabled" rowspan="1" colspan="1">Doğum Tarihi</th>
                             <th class="hidden-xs hidden-sm sorting_disabled" rowspan="1" colspan="1">Durumu</th>
+                            <th class="hidden-xs sorting_disabled" rowspan="1" colspan="1">Aşı Tarihi</th>
                             <th class="hidden-xs sorting_disabled" rowspan="1" colspan="1">Hamile</th>
+                            <th class="hidden-xs sorting_disabled" rowspan="1" colspan="1">Hamilelik İlerleme Durumu</th>
                             <th class="hidden-xs  sorting_disabled" rowspan="1" colspan="1">Süt Verme Durumu</th>
                             <th class="operationTableWideColumn">
                                 <span class="visible-xs text-center">Edit</span>
@@ -87,21 +55,40 @@ Value = "3",
                     <tbody>
                         @if (Model != null)
                         {
-                            foreach (var item in Model.OrderBy(m => m.StateId))
+                            foreach (var item in Model.OrderBy(m => m.PregnantDate).OrderByDescending(m=>m.IsPregnant).OrderBy(m => m.StateId))
                             {
-                                <tr>
+                                <tr class="@(item.PregnantDate.HasValue ? "" : "bg-amber" )">
                                     <td>@item.EaringNo</td>
                                     <td>@item.Name</td>
                                     <td class="hidden-xs hidden-sm">@Html.DisplayFor(m => item.BirthDate)</td>
                                     <td class="hidden-xs hidden-sm">@Html.DisplayFor(m => item.State.Name)</td>
+                                    <td class="hidden-xs hidden-sm">@Html.DisplayFor(m => item.PregnantDate)</td>
                                     <td class="hidden-xs">
-                                        @Html.CheckBoxFor(m => item.IsPregnant, new { @class = "custom-control-input", @readonly = "readonly", data_toggle = "asyncswitch", data_on_text = "Evet", data_off_text = "Hayır", data_url = Url.Action("ChangeState", "Cows", new { id = item.Id }) })
+                                        @Html.CheckBoxFor(m => item.IsPregnant, new { @class = "custom-control-input", data_toggle = "asyncswitch", data_on_text = "Evet", data_off_text = "Hayır", data_url = Url.Action("ChangeState", "Cows", new { id = item.Id }) })
                                     </td>
+                                    @if (item.IsPregnant && item.PregnantDate.HasValue)
+                                    {
+
+                                        <td class="hidden-xs hidden-sm">@(DateTime.Today.Month - item.PregnantDate.Value.Month > 0 ? (DateTime.Today.Month - item.PregnantDate.Value.Month) : 1) Aylık Hamile</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Hamile Değil</td>
+                                    }
                                     <td class="hidden-xs">
-                                        @Html.CheckBoxFor(m => item.IsLactation, new { @class = "custom-control-input", @readonly = "readonly", data_toggle = "asyncswitch", data_on_text = "Evet", data_off_text = "Hayır", data_url = Url.Action("ChangeState", "Cows", new { id = item.Id }) })
+                                        @Html.CheckBoxFor(m => item.IsLactation, new { @class = "custom-control-input", data_toggle = "asyncswitch", data_on_text = "Evet", data_off_text = "Hayır", data_url = Url.Action("ChangeState", "Cows", new { id = item.Id }) })
                                     </td>
                                     <td class="text-center">
-                                        @Html.EditButton(Url.Action("Edit", new { id = item.Id }), "sm")
+                                        @if (item.StateId == 1)
+                                        {
+
+                                            @Html.EditButton(Url.Action("Edit", new { id = item.Id }), "sm")
+                                        }
+                                        else
+                                        {
+                                            @Html.EditButton(Url.Action("Edit", new { id = item.Id }), "sm",true)
+
+                                        }
                                         @Html.DeleteButton(Url.Action("Delete", new { id = item.Id }))
                                     </td>
                                 </tr>
@@ -113,3 +100,27 @@ Value = "3",
         </div>
     </section>
 </div>
+@foreach (var item in Model)
+{
+    if ((DateTime.Today.Month - item.BirthDate.Month) > 2 && item.DrinkMilk)
+    {
+        <div class="modal fade " id="age-and-milk-control" tabindex="-1" role="dialog">
+            <div class="modal-dialog " role="document">
+                <div class="modal-content modal-col-deep-purple">
+                    <div class="modal-body">
+                        <p style="color:sandybrown" class="font-bold">@item.Name</p>
+                        <p style="color:sandybrown" class="font-bold"> İsimli buzağı@(ViewBag.changelist.Count > 1 ? "ları" : "yı") sütten ayırmalısınız. </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                $('#age-and-milk-control').modal();
+            });
+        </script>
+    }
+}

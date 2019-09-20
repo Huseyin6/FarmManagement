@@ -10,5 +10,6 @@ namespace Farm.Web.ViewModels
     {
         public bool IsPregnant { get; set; }
         public bool IsLactation { get; set; }
+        public DateTime? PregnantDate { get; set; }
     }
 }

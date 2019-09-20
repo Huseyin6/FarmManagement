@@ -9,12 +9,15 @@ namespace Farm.Web.Views.HtmlHelpers
 {
     public static partial class HtmlButtonHelper
     {
-        public static MvcHtmlString EditButton(this HtmlHelper html, string url, string buttonSize = null)
+        public static MvcHtmlString EditButton(this HtmlHelper html, string url, string buttonSize = null,bool disabled=false)
         {
             buttonSize = buttonSize ?? "xs";
             var text = "Düzenle";
             var builder = new StringBuilder();
-            builder.AppendFormat($"<a class=\"btn btn-success btn-{buttonSize} editButton\" href=\"{url}\" >");
+            if(!disabled)
+                builder.AppendFormat($"<a class=\"btn btn-success btn-{buttonSize} editButton\" href=\"{url}\" >");
+            else
+                builder.AppendFormat($"<a disabled=\"disabled\" class=\"btn btn-success btn-{buttonSize} editButton\" href=\"#\"  >");
             builder.AppendFormat($"<span>{text}</span>");
             builder.Append("</a>");
             return MvcHtmlString.Create(builder.ToString());
