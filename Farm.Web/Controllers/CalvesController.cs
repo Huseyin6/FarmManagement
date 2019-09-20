@@ -46,10 +46,36 @@ namespace Farm.Web.Controllers
                 {
                     Text = "Erkek",
                     Value = "1"
-                }                
+                }
             }, "Value", "Text");
-        public ActionResult Index(int? state, int? sex,bool? drinkmilk)
+        public List<string> CheckAge()
         {
+            var model = db.Repository.GetMany(m => m.CattleTypeId == (int)CattleTypes.Calf);
+            var today = DateTime.Today;
+            List<string> itemsName = new List<string>();
+            foreach (var item in model)
+            {
+                // Sütten ayrılmış buzağılar iki aylık olduktan sonra cinsiyetlerine göre ilgili tablolara gönderilir.
+                if ((today.Month - item.BirthDate.Month) > 2 && !item.DrinkMilk)
+                {
+                    if (item.Sex == (int)Sex.Female)
+                    {
+                        item.CattleTypeId = (int)CattleTypes.Heifer;
+                    }
+                    else
+                    {
+                        item.CattleTypeId = (int)CattleTypes.Steer;
+                    }
+                    itemsName.Add(item.Name);
+                    db.Repository.Update(item);
+                    db.Commit();
+                }
+            }
+            return itemsName;
+        }
+        public ActionResult Index(int? state, int? sex, bool? drinkmilk)
+        {
+            ViewBag.changelist= CheckAge();
             if (state.HasValue)
             {
                 if (sex == null && drinkmilk == null)
@@ -58,17 +84,17 @@ namespace Farm.Web.Controllers
                 }
                 else if (sex.HasValue)
                 {
-                    return View(db.Repository.GetMany(m => m.CattleTypeId == (int)CattleTypes.Calf && m.StateId == state && m.Sex==sex));
+                    return View(db.Repository.GetMany(m => m.CattleTypeId == (int)CattleTypes.Calf && m.StateId == state && m.Sex == sex));
                 }
                 else if (drinkmilk.HasValue)
                 {
-                    return View(db.Repository.GetMany(m => m.CattleTypeId == (int)CattleTypes.Calf && m.StateId == state && m.DrinkMilk==drinkmilk));
+                    return View(db.Repository.GetMany(m => m.CattleTypeId == (int)CattleTypes.Calf && m.StateId == state && m.DrinkMilk == drinkmilk));
                 }
 
             }
             else if (state == null && sex.HasValue && drinkmilk == null)
             {
-                return View(db.Repository.GetMany(m => m.CattleTypeId == (int)CattleTypes.Calf && m.Sex==sex));
+                return View(db.Repository.GetMany(m => m.CattleTypeId == (int)CattleTypes.Calf && m.Sex == sex));
             }
             else if (state == null && sex == null && drinkmilk.HasValue)
             {
