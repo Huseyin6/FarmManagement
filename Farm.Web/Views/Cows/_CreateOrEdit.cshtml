@@ -75,7 +75,7 @@
 
     $(function () {
         $("form").submit(function (e) {
-            if ($('#IsPregnant').prop("checked", true) && $('#PregnantDate').val() == "") {
+            if ($('#IsPregnant').bootstrapSwitch('state')===true && $('#PregnantDate').val() == "") {
                 AddError("hata", 'panel-body');
                 return false;
                 event.preventDefault();
