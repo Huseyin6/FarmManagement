@@ -75,9 +75,10 @@
 
     $(function () {
         $("form").submit(function (e) {
-            if ($('#IsPregnant').prop("checked", false) && $('#PregnantDate').val() == "") {
+            if ($('#IsPregnant').prop("checked", true) && $('#PregnantDate').val() == "") {
                 AddError("hata", 'panel-body');
                 return false;
+                event.preventDefault();
             }
         });
 
