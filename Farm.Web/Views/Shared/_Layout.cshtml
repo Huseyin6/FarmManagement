@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Welcome To Farm Management Project</title>
+    <title>Çiftlik Yönetimi</title>
     <!-- Favicon-->
-    <link rel="icon" href="~/Content/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="~/Content/images/cow4.png" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
@@ -91,7 +91,7 @@
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
-                            <li><a href="@Url.Action("Index","Profile")"><i class="material-icons">person</i>Profil</a></li>
+                            <li><a href="#"><i class="material-icons">person</i>Profil</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="javascript:void(0);"><i class="material-icons">input</i>Çıkış</a></li>
                         </ul>
@@ -141,25 +141,100 @@
                     <li class="header">YÖNETİMSEL İŞLEMLER</li>
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
+                            @*<i class="material-icons">settings</i>*@
                             <i class="material-icons">settings</i>
                             <span>Hayvan Yönetimi</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="@Url.Action("Index","Cows")">İnek</a>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>İnekler</span>
+                                </a>
+                                <ul class="ml-menu">
+                                    <li>
+                                        <a href="@Url.Action("Index","Cows")">Çifliktekiler</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Index","Cows",new {state=2 })">Satılanlar</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Index","Cows",new {state=3 })">Ölenler</a>
+                                    </li>
+                                </ul>
                             </li>
                             <li>
-                                <a href="@Url.Action("Index","Calves")">Buzağı</a>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>Düveler</span>
+                                </a>
+                                <ul class="ml-menu">
+                                    <li>
+                                        <a href="@Url.Action("Index","Heifers")">Çifliktekiler</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Index","Heifers",new {state=2 })">Satılanlar</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Index","Heifers",new {state=3 })">Ölenler</a>
+                                    </li>
+                                </ul>
                             </li>
                             <li>
-                                <a href="@Url.Action("Index","Heifers")">Düve</a>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>Buzağılar</span>
+                                </a>
+                                <ul class="ml-menu">
+                                    <li>
+                                        <a href="@Url.Action("Index","Calves")">Çifliktekiler</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Index","Calves",new {state=2 })">Satılanlar</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Index","Calves",new {state=3 })">Ölenler</a>
+                                    </li>
+                                </ul>
                             </li>
                             <li>
-                                <a href="@Url.Action("Index","Steers")">Dana</a>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>Danalar</span>
+                                </a>
+                                <ul class="ml-menu">
+                                    <li>
+                                        <a href="@Url.Action("Index","Steers")">Çifliktekiler</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Index","Steers",new {state=2 })">Satılanlar</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Index","Steers",new {state=3 })">Ölenler</a>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
-                    </li>
-                </ul>
+                        @*<ul class="ml-menu">
+                                        <li>
+                                            <a href="javascript:void(0);">İnek</a>
+                                            <ul class="ml-menu" style="display:block">
+                                                <li>
+                                                    <a href="@Url.Action("Index","Cows")">Çifliktekiler</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Index","Cows")">Satılanlar</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Index","Calves")">Buzağı</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Index","Heifers")">Düve</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Index","Steers")">Dana</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>*@
             </div>
             <!-- #Menu -->
             <!-- Footer -->
@@ -208,7 +283,7 @@
 
 
     <script src="~/Content/momentjs/moment.js"></script>
-    
+
     <!-- Bootstrap Datepicker-->
     <script src="~/Content/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 

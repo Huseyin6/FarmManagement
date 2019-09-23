@@ -68,6 +68,7 @@
     function AddError(text, classname) {
         var errorHtml = `
             <div class="alert alert-danger alert-dismissible ">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
                 ${text}
             </div>`
         $('.' + classname).prepend(errorHtml);
@@ -75,9 +76,10 @@
 
     $(function () {
         $("form").submit(function (e) {
-            if ($('#IsPregnant').prop("checked", false) && $('#PregnantDate').val() == "") {
+            if ($('#IsPregnant').bootstrapSwitch('state')===true && $('#PregnantDate').val() == "") {
                 AddError("hata", 'panel-body');
                 return false;
+                event.preventDefault();
             }
         });
 

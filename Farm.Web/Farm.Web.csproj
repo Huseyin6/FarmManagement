@@ -324,6 +324,15 @@
     <Content Include="Content\flot-charts\jquery.flot.threshold.js" />
     <Content Include="Content\flot-charts\jquery.flot.time.js" />
     <Content Include="Content\flot-charts\jquery.js" />
+    <Content Include="Content\images\animal.png" />
+    <Content Include="Content\images\animal4.png" />
+    <Content Include="Content\images\animal5.png" />
+    <Content Include="Content\images\animal6.png" />
+    <Content Include="Content\images\cow %281%29.png" />
+    <Content Include="Content\images\cow.png" />
+    <Content Include="Content\images\cow2.png" />
+    <Content Include="Content\images\cow3.png" />
+    <Content Include="Content\images\cow4.png" />
     <Content Include="Content\images\user-img-background.jpg" />
     <Content Include="Content\images\user.png" />
     <Content Include="Content\jquery-countto\jquery.countTo.js" />

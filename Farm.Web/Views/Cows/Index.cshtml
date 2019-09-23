@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";  
 }
 <div class="row">
-    <h3>İnekler</h3>
+    <h2>İnekler</h2>
     <section class="panel panel-featured panel-featured-info panel-default">
         <div class="panel-body">
             @using (Html.BeginForm("Index", "Cows", FormMethod.Get, new { @class = "form-horizantal", style = "margin:5px 0px" }))
@@ -57,7 +57,7 @@
                         {
                             foreach (var item in Model.OrderBy(m => m.PregnantDate).OrderByDescending(m=>m.IsPregnant).OrderBy(m => m.StateId))
                             {
-                                <tr class="@(item.PregnantDate.HasValue ? "" : "bg-amber" )">
+                                <tr class="@(item.PregnantDate.HasValue ? "" : "bg-orange" )">
                                     <td>@item.EaringNo</td>
                                     <td>@item.Name</td>
                                     <td class="hidden-xs hidden-sm">@Html.DisplayFor(m => item.BirthDate)</td>
@@ -100,27 +100,3 @@
         </div>
     </section>
 </div>
-@foreach (var item in Model)
-{
-    if ((DateTime.Today.Month - item.BirthDate.Month) > 2 && item.DrinkMilk)
-    {
-        <div class="modal fade " id="age-and-milk-control" tabindex="-1" role="dialog">
-            <div class="modal-dialog " role="document">
-                <div class="modal-content modal-col-deep-purple">
-                    <div class="modal-body">
-                        <p style="color:sandybrown" class="font-bold">@item.Name</p>
-                        <p style="color:sandybrown" class="font-bold"> İsimli buzağı@(ViewBag.changelist.Count > 1 ? "ları" : "yı") sütten ayırmalısınız. </p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <script type="text/javascript">
-            $(function () {
-                $('#age-and-milk-control').modal();
-            });
-        </script>
-    }
-}
