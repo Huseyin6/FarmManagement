@@ -57,7 +57,7 @@
                             <td class="hidden-xs hidden-sm">@Html.DisplayFor(m => item.State.Name)</td>
                             <td class="hidden-xs hidden-sm">@Html.DisplayFor(m => item.PregnantDate)</td>
                             <td class="hidden-xs">
-                                @Html.CheckBoxFor(m => item.IsPregnant, new { @class = "custom-control-input",data_toggle = "asyncswitch", data_on_text = "Evet", data_off_text = "Hayır", data_url = Url.Action("ChangeState", "Cows", new { id = item.Id }) })
+                                @Html.CheckBoxFor(m => item.IsPregnant, new { @class = "custom-control-input",data_toggle = "asyncswitch", data_on_text = "Evet", data_off_text = "Hayır", data_url = Url.Action("ChangePregnantState", "Cows", new { id = item.Id }) })
                             </td>
                             @if (item.IsPregnant && item.PregnantDate.HasValue)
                             {

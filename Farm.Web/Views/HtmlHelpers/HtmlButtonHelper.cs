@@ -26,9 +26,9 @@ namespace Farm.Web.Views.HtmlHelpers
         {
             var text = "Sil";
             var builder = new StringBuilder();
-            builder.AppendFormat($"<a class=\"btn btn-danger btn-sm\" data-toggle=\"confirmation\" data-url=\"{url}\"{attribute}>");
+            builder.AppendFormat($"<a class=\"btn btn-danger btn-xs\" data-toggle=\"confirmation\" data-url=\"{url}\"{attribute}>");
             builder.AppendFormat($"<span data-toggle=\"tooltip\" data-placement=\"top\" title=\"{text}\">");
-            builder.AppendFormat("<i class=\"fa fa-trash-o fa-fw\"></i>");
+            builder.AppendFormat($"<i class=\"material-icons\">delete_forever</i>");
             builder.Append("</span>");
             builder.Append("</a>");
             return MvcHtmlString.Create(builder.ToString());

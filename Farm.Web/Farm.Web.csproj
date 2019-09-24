@@ -324,14 +324,9 @@
     <Content Include="Content\flot-charts\jquery.flot.threshold.js" />
     <Content Include="Content\flot-charts\jquery.flot.time.js" />
     <Content Include="Content\flot-charts\jquery.js" />
-    <Content Include="Content\images\animal.png" />
     <Content Include="Content\images\animal4.png" />
-    <Content Include="Content\images\animal5.png" />
-    <Content Include="Content\images\animal6.png" />
-    <Content Include="Content\images\cow %281%29.png" />
     <Content Include="Content\images\cow.png" />
     <Content Include="Content\images\cow2.png" />
-    <Content Include="Content\images\cow3.png" />
     <Content Include="Content\images\cow4.png" />
     <Content Include="Content\images\user-img-background.jpg" />
     <Content Include="Content\images\user.png" />
@@ -533,6 +528,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\BaseFinancialViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CalvesViewModel.cs" />
     <Compile Include="ViewModels\CowsViewModel.cs" />
@@ -562,7 +558,6 @@
     <Content Include="Views\Cows\_CreateOrEdit.cshtml" />
     <Content Include="Views\Calves\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\View.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\Boolean.cshtml" />
     <Content Include="Views\Heifers\Index.cshtml" />
     <Content Include="Views\Steers\Index.cshtml" />
     <Content Include="Views\Calves\Create.cshtml" />
@@ -579,6 +574,10 @@
     <Content Include="Views\Steers\Create.cshtml" />
     <Content Include="Views\Steers\Edit.cshtml" />
     <Content Include="Views\Steers\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Shared\_ErrorModal.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\View.cshtml" />
+    <Content Include="Views\Income\Create.cshtml" />
+    <Content Include="Views\Income\_CreateOrEdit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

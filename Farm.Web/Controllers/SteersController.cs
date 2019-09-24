@@ -54,6 +54,7 @@ namespace Farm.Web.Controllers
             return View(model);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(SteersViewModel model)
         {
             model.StateSelectList = selectList;
@@ -76,6 +77,7 @@ namespace Farm.Web.Controllers
             return View(Vmodel);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, SteersViewModel model)
         {
             model.StateSelectList = selectList;

@@ -52,7 +52,7 @@ namespace Farm.Web.Controllers
         {
             var model = db.Repository.GetMany(m => m.CattleTypeId == (int)CattleTypes.Calf);
             var today = DateTime.Today;
-            List<string> itemsName = new List<string>();
+            List<string> itemsEaringNo = new List<string>();
             foreach (var item in model)
             {
                 // Sütten ayrılmış buzağılar iki aylık olduktan sonra cinsiyetlerine göre ilgili tablolara gönderilir.
@@ -66,12 +66,12 @@ namespace Farm.Web.Controllers
                     {
                         item.CattleTypeId = (int)CattleTypes.Steer;
                     }
-                    itemsName.Add(item.Name);
+                    itemsEaringNo.Add(item.EaringNo);
                     db.Repository.Update(item);
                     db.Commit();
                 }
             }
-            return itemsName;
+            return itemsEaringNo;
         }
         public ActionResult Index(int? state, int? sex, bool? drinkmilk)
         {
@@ -111,6 +111,7 @@ namespace Farm.Web.Controllers
             return View(model);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(CalvesViewModel model)
         {
             model.StateSelectList = selectList;
@@ -134,6 +135,7 @@ namespace Farm.Web.Controllers
             return View(Vmodel);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, CalvesViewModel model)
         {
             model.StateSelectList = selectList;
@@ -154,6 +156,15 @@ namespace Farm.Web.Controllers
             db.Repository.RemoveById(id);
             db.Commit();
             return RedirectToAction("Index", "Calves");
+        }
+        [AjaxOnly]
+        public ActionResult ChangeDrinkMilkState(int id)
+        {
+            var repo = db.Repository.GetById(id);
+            repo.DrinkMilk = !repo.DrinkMilk;
+            db.Repository.Update(repo);
+            db.Commit();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
     }
 }

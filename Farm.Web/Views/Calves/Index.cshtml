@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Calves";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int olderCalvesDrinksCount = Model.Where(m => DateTime.Today.Month - m.BirthDate.Month > 2 && m.DrinkMilk).Count();
     SelectList selectList = new SelectList(new List<SelectListItem>
 {
 new SelectListItem
@@ -59,7 +60,7 @@ Value = "1"
             {
                 <div class="form-group">
                     <label class="control-label" for="State" style="display:inline-block;float:left;padding:5px">Durum</label>
-                    <div class="col-md-1 form-inline">
+                    <div class="col-md-1  form-inline">
                         @Html.DropDownList("state", selectList, new { @class = "form-control autoWidth", style = "display:inline-block;float:left" })
                     </div>
                     <div class="col-md-1 form-inline">
@@ -120,7 +121,7 @@ Value = "1"
                                     <td class="hidden-xs hidden-sm">@Html.DisplayFor(m => item.State.Name)</td>
                                     <td class="hidden-xs hidden-sm">@Html.DisplayFor(m => item.Sex)</td>
                                     <td class="hidden-xs">
-                                        @Html.CheckBoxFor(m => item.DrinkMilk, new { @class = "custom-control-input", data_toggle = "asyncswitch", data_on_text = "Evet", data_off_text = "Hayır", data_url = Url.Action("ChangeState", "AnnouncementManagement", new { id = item.Id }) })
+                                        @Html.CheckBoxFor(m => item.DrinkMilk, new { @class = "custom-control-input", data_toggle = "asyncswitch", data_on_text = "Evet", data_off_text = "Hayır", data_url = Url.Action("ChangeDrinkMilkState", "Calves", new { id = item.Id }) })
                                     </td>
                                     <td class="text-center">
                                         @Html.EditButton(Url.Action("Edit", new { id = item.Id }), "sm")
@@ -136,6 +137,32 @@ Value = "1"
         </div>
     </section>
 </div>
+<div class="modal fade " id="age-and-milk-control" tabindex="-1" role="dialog">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content modal-col-deep-purple">
+            <div class="modal-body">
+                @foreach (var item in Model)
+                {
+                    if ((DateTime.Today.Month - item.BirthDate.Month) > 2 && item.DrinkMilk)
+                    {
+                        <p style="color:sandybrown" class="font-bold">@item.EaringNo</p>
+                    }
+
+                }
+                <p style="color:sandybrown" class="font-bold"> Küpe numaralı buzağı@(olderCalvesDrinksCount > 1 ? "ları" : "yı") sütten ayırmalısınız. </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+    if (@olderCalvesDrinksCount>0)
+        $('#age-and-milk-control').modal();
+    });
+</script>
 @if (ViewBag.changelist.Count > 0)
 {
     <div class="modal fade " id="deneme" tabindex="-1" role="dialog">
@@ -148,7 +175,7 @@ Value = "1"
                         <p>@item</p>
                     }
 
-                    <p> İsimli buzağı@(ViewBag.changelist.Count > 1 ? "lar" : "") 2 aydan büyük oldukları için ilgili tablolara eklenmiştir. </p>
+                    <p>Küpe numaralı buzağı@(ViewBag.changelist.Count > 1 ? "lar" : "") 2 aydan büyük oldukları için ilgili tablolara eklenmiştir. </p>
                     <p style="color:sandybrown"><b>Not: </b>Eğer 2 aydan büyük buzağılarınız varsa sütten ayırmayı ve sisteme kaydetmeyi unutmayınız!</p>
 
                 </div>
@@ -163,28 +190,4 @@ Value = "1"
             $('#deneme').modal();
         });
     </script>
-}
-@foreach (var item in Model)
-{
-    if ((DateTime.Today.Month - item.BirthDate.Month) > 2 && item.DrinkMilk)
-    {
-        <div class="modal fade " id="age-and-milk-control" tabindex="-1" role="dialog">
-            <div class="modal-dialog " role="document">
-                <div class="modal-content modal-col-deep-purple">
-                    <div class="modal-body">
-                        <p style="color:sandybrown" class="font-bold">@item.Name</p>
-                        <p style="color:sandybrown" class="font-bold"> İsimli buzağı@(ViewBag.changelist.Count > 1 ? "ları" : "yı") sütten ayırmalısınız. </p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <script type="text/javascript">
-            $(function () {
-                $('#age-and-milk-control').modal();
-            });
-        </script>
-    }
 }

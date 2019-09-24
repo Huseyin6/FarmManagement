@@ -1,7 +1,7 @@
 ﻿@model List<Farm.Data.Entities.Cattle>
 @{
     ViewBag.Title = "Cows";
-    Layout = "~/Views/Shared/_Layout.cshtml";  
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="row">
     <h2>İnekler</h2>
@@ -55,7 +55,7 @@
                     <tbody>
                         @if (Model != null)
                         {
-                            foreach (var item in Model.OrderBy(m => m.PregnantDate).OrderByDescending(m=>m.IsPregnant).OrderBy(m => m.StateId))
+                            foreach (var item in Model.OrderBy(m => m.PregnantDate).OrderByDescending(m=>m.IsPregnant))
                             {
                                 <tr class="@(item.PregnantDate.HasValue ? "" : "bg-orange" )">
                                     <td>@item.EaringNo</td>
@@ -64,7 +64,7 @@
                                     <td class="hidden-xs hidden-sm">@Html.DisplayFor(m => item.State.Name)</td>
                                     <td class="hidden-xs hidden-sm">@Html.DisplayFor(m => item.PregnantDate)</td>
                                     <td class="hidden-xs">
-                                        @Html.CheckBoxFor(m => item.IsPregnant, new { @class = "custom-control-input", data_toggle = "asyncswitch", data_on_text = "Evet", data_off_text = "Hayır", data_url = Url.Action("ChangeState", "Cows", new { id = item.Id }) })
+                                        @Html.CheckBoxFor(m => item.IsPregnant, new { @class = "custom-control-input",data_toggle = "asyncswitch", data_on_text = "Evet", data_off_text = "Hayır", data_url = Url.Action("ChangePregnantState", "Cows", new { id = item.Id }) })
                                     </td>
                                     @if (item.IsPregnant && item.PregnantDate.HasValue)
                                     {
@@ -76,7 +76,7 @@
                                         <td>Hamile Değil</td>
                                     }
                                     <td class="hidden-xs">
-                                        @Html.CheckBoxFor(m => item.IsLactation, new { @class = "custom-control-input", data_toggle = "asyncswitch", data_on_text = "Evet", data_off_text = "Hayır", data_url = Url.Action("ChangeState", "Cows", new { id = item.Id }) })
+                                        @Html.CheckBoxFor(m => item.IsLactation, new { @class = "custom-control-input", data_toggle = "asyncswitch", data_on_text = "Evet", data_off_text = "Hayır", data_url = Url.Action("ChangeLactationState", "Cows", new { id = item.Id }) })
                                     </td>
                                     <td class="text-center">
                                         @if (item.StateId == 1)
@@ -100,3 +100,8 @@
         </div>
     </section>
 </div>
+<script type="text/javascript">
+    $(function () {
+        
+    });
+</script>
