@@ -1,0 +1,6 @@
+﻿@model BaseFinancialViewModel
+<h2>Gelir Kaydı Düzenle</h2>
+@using (Html.BeginForm("Edit", "Income", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.Partial("_CreateOrEdit")
+}

@@ -39,17 +39,15 @@
                 <table class="table table-striped table-hover table-bordered cow-list-table">
                     <thead>
                         <tr role="row" class="info">
-                            <th class="sorting_disabled" rowspan="1" colspan="1">Küpe No</th>
-                            <th class="sorting_disabled" rowspan="1" colspan="1">Adı</th>
-                            <th class="hidden-xs hidden-sm sorting_disabled" rowspan="1" colspan="1">Doğum Tarihi</th>
-                            <th class="hidden-xs hidden-sm sorting_disabled" rowspan="1" colspan="1">Durumu</th>
-                            <th class="hidden-xs sorting_disabled" rowspan="1" colspan="1">Aşı Tarihi</th>
-                            <th class="hidden-xs sorting_disabled" rowspan="1" colspan="1">Hamile</th>
-                            <th class="hidden-xs sorting_disabled" rowspan="1" colspan="1">Hamilelik İlerleme Durumu</th>
-                            <th class="hidden-xs  sorting_disabled" rowspan="1" colspan="1">Süt Verme Durumu</th>
-                            <th class="operationTableWideColumn">
-                                <span class="visible-xs text-center">Edit</span>
-                            </th>
+                            <th>Küpe No</th>
+                            <th>Adı</th>
+                            <th class="hidden-xs hidden-sm">Doğum Tarihi</th>
+                            <th class="hidden-xs hidden-sm">Durumu</th>
+                            <th class="hidden-xs hidden-sm">Aşı Tarihi</th>
+                            <th>Hamile</th>
+                            <th class="hidden-xs hidden-sm">Hamilelik İlerleme Durumu</th>
+                            <th>Süt Verme Durumu</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,13 +55,13 @@
                         {
                             foreach (var item in Model.OrderBy(m => m.PregnantDate).OrderByDescending(m=>m.IsPregnant))
                             {
-                                <tr class="@(item.PregnantDate.HasValue ? "" : "bg-orange" )">
+                                <tr class="@(item.PregnantDate.HasValue ? "" : "bg-purple" )">
                                     <td>@item.EaringNo</td>
                                     <td>@item.Name</td>
                                     <td class="hidden-xs hidden-sm">@Html.DisplayFor(m => item.BirthDate)</td>
                                     <td class="hidden-xs hidden-sm">@Html.DisplayFor(m => item.State.Name)</td>
                                     <td class="hidden-xs hidden-sm">@Html.DisplayFor(m => item.PregnantDate)</td>
-                                    <td class="hidden-xs">
+                                    <td>
                                         @Html.CheckBoxFor(m => item.IsPregnant, new { @class = "custom-control-input",data_toggle = "asyncswitch", data_on_text = "Evet", data_off_text = "Hayır", data_url = Url.Action("ChangePregnantState", "Cows", new { id = item.Id }) })
                                     </td>
                                     @if (item.IsPregnant && item.PregnantDate.HasValue)
@@ -73,9 +71,9 @@
                                     }
                                     else
                                     {
-                                        <td>Hamile Değil</td>
+                                        <td class="hidden-xs hidden-sm">Hamile Değil</td>
                                     }
-                                    <td class="hidden-xs">
+                                    <td>
                                         @Html.CheckBoxFor(m => item.IsLactation, new { @class = "custom-control-input", data_toggle = "asyncswitch", data_on_text = "Evet", data_off_text = "Hayır", data_url = Url.Action("ChangeLactationState", "Cows", new { id = item.Id }) })
                                     </td>
                                     <td class="text-center">
@@ -100,8 +98,3 @@
         </div>
     </section>
 </div>
-<script type="text/javascript">
-    $(function () {
-        
-    });
-</script>

@@ -4,32 +4,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     decimal value = ViewBag.Total;
 }
-
 <div class="row">
     <h3>Gelir Tablosu</h3>
 
-    @*<section class="panel panel-featured panel-featured-info panel-default">*@
-        @*<div class="panel-body" id="filter-panel">*@
-            @*@using (Html.BeginForm("Table", "Income", FormMethod.Get, new { @class = "form-inline", style = "margin:5px 0px" }))
-                {
-                    @*<div class="form-group " id="filter-panel">
-                            <label class="filter-label " for="State">Gelir Türü</label>
-                            @Html.DropDownList("state", GetStatusSelectList(), Localize("PassiveOrActive"), new { @class = "form-control autoWidth" })
-                        </div>
-                        <div class="form-group " id="filter-panel">
-                            <label class="filter-label" for="BeginDate">@Localize("AnnouncementBeginDate")</label>
-                            @Html.DropDownList("beginYear", GetNumberRangeSelectList(1960, DateTime.Today.Year), new { @class = "form-control autoWidth" })
-                        </div>
-                        <div class="form-group " id="filter-panel">
-                            <label class="filter-label" for="EndDate">@Localize("AnnouncementEndDate")</label>
-                            @Html.DropDownList("endYear", GetNumberRangeSelectList(1960, DateTime.Today.Year), new { @class = "form-control autoWidth" })
-                        </div>
-                        <div class="form-group  pull-right">
-                            <button type="submit" class="btn btn-info btn-filter" data-loading-text="@Localize("Searching")">@Localize("Filter")</button>
-                        </div>
-                }*@
-        @*</div>*@
-    @*</section>*@
     <section class="panel panel-featured panel-default">
         <div class="panel-heading">
             <div class="text-right">
@@ -43,10 +20,9 @@
                         <tr role="row" class="info">
                             <th width="10%">Gelir Türü</th>
                             <th width="10%" class="hidden-xs">Tarih</th>
-                            <th width="50%" class="hidden-xs hidden-sm">Açıklama</th>
+                            <th width="50%">Açıklama</th>
                             <th width="10%" class="text-right">Tutar</th>
-                            <th width="20%">
-                            </th>
+                            <th width="20%"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,7 +32,7 @@
                             {
                                 <tr>
                                     <td>@item.FinancialAssetType.Name</td>
-                                    <td class="hidden-xs hidden-sm">@Html.DisplayFor(m => item.TransactionDate)</td>
+                                    <td class="hidden-xs">@Html.DisplayFor(m => item.TransactionDate)</td>
                                     <td>
                                         @Html.Raw(item.Description)
                                     </td>
@@ -89,10 +65,5 @@
                 minimumFractionDigits: 2,
             });
         $('#show-sum-monay').append(`${formattedOutput.format(@value)}`);
-        function Hesap() {
-
-        }
-        $('[data-toggle="popover"]').popover();
-
     });
 </script>

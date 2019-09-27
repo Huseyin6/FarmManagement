@@ -88,6 +88,7 @@
     <Compile Include="Entities\FinancialAsset.cs" />
     <Compile Include="Entities\FinancialAssetType.cs" />
     <Compile Include="Entities\State.cs" />
+    <Compile Include="Entities\SummaryFinancial.cs" />
     <Compile Include="Enumerations\CattleTypes.cs" />
     <Compile Include="Enumerations\ExpenseType.cs" />
     <Compile Include="Enumerations\IncomeType.cs" />

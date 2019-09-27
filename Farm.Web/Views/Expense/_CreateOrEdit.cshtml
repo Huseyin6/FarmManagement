@@ -11,7 +11,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.Description, "Açıklama", new { @class = "col-lg-3 col-xl-2 control-label" })
             <div class="col-md-6 form-inline">
-                @Html.TextAreaFor(m => m.Description, new { @class = "form-control summernote"})
+                @Html.TextAreaFor(m => m.Description, new { @class = "form-control summernote" })
                 @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -35,8 +35,8 @@
         <div class="form-group" style="margin-top:10px">
             <div class="col-md-12">
                 <div class="modal-footer">
-                    @Html.SaveButtons(Url.Action("Table", "Income"))
-                    @Html.CancelButton(Url.Action("Table", "Income"))
+                    @Html.SaveButtons(Url.Action("Table", "Expense"))
+                    @Html.CancelButton(Url.Action("Table", "Expense"))
                 </div>
             </div>
         </div>
@@ -51,4 +51,5 @@
         });
     });
 </script>
+
 

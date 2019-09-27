@@ -374,6 +374,7 @@
     <Content Include="Content\jquery\jquery.js" />
     <Content Include="Content\jquery\jquery.min.js" />
     <Content Include="Content\js\admin.js" />
+    <Content Include="Content\js\pages\charts\Chart.bundle.min.js" />
     <Content Include="Content\js\pages\forms\basic-form-elements.js" />
     <Content Include="Content\js\demo.js" />
     <Content Include="Content\js\helpers.js" />
@@ -578,6 +579,10 @@
     <Content Include="Views\Shared\DisplayTemplates\View.cshtml" />
     <Content Include="Views\Income\Create.cshtml" />
     <Content Include="Views\Income\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Income\Edit.cshtml" />
+    <Content Include="Views\Expense\Create.cshtml" />
+    <Content Include="Views\Expense\Edit.cshtml" />
+    <Content Include="Views\Expense\_CreateOrEdit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
