@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Farm.Data.Entities
 {
-    public class ExpenseType
+    public class FinancialAssetType
     {
         public int Id { get; set; }
         public string Name { get; set; }
+   
     }
 }

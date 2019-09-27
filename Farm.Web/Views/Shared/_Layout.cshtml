@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Welcome To Farm Management Project</title>
+    <title>Çiftlik Yönetimi</title>
     <!-- Favicon-->
-    <link rel="icon" href="~/Content/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="~/Content/images/cow4.png" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
@@ -15,11 +15,13 @@
 
     <!-- Bootstrap Core Css -->
     <link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Bootstrap Select Css -->
     <link href="~/Content/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" />
-    <!-- BootstrapSwitch  -->
+
+    <!-- Bootstrap Switch  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/css/bootstrap2/bootstrap-switch.min.css" />
-    <!-- FontAwesome-->
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
     <!-- JQuery DataTable Css -->
     <link href="~/Content/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.min.css" rel="stylesheet">
 
@@ -35,6 +37,9 @@
     <!-- Morris Chart Css-->
     <link href="~/Content/morrisjs/morris.css" rel="stylesheet" />
 
+    <!-- Summernote -->
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
+
     <!-- Custom Css -->
     <link href="~/Content/style.css" rel="stylesheet">
     <link href="~/Content/Site.css" rel="stylesheet">
@@ -46,7 +51,7 @@
     <script src="~/Content/jquery/jquery.min.js"></script>
 </head>
 
-<body class="theme-deep-purple">
+<body class="theme-deep-orange">
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
@@ -71,8 +76,8 @@
     <nav class="navbar">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a href="javascript:void(0);" class="bars"></a>
-                @Html.ActionLink("Farm Management", "Index", "Home", new { @class = "navbar-brand" })
+                <img src="~/Content/images/cow2.png" alt="Alternate Text" style="float:left;margin-top:5px;margin-right:5px" />
+                <a href="/Home/" class="navbar-brand">Çiftlik Yönetimi</a>
             </div>
         </div>
     </nav>
@@ -80,25 +85,6 @@
     <section>
         <!-- Left Sidebar -->
         <aside id="leftsidebar" class="sidebar">
-            <!-- User Info -->
-            <div class="user-info">
-                <div class="image">
-                    <img src="~/Content/images/user.png" width="48" height="48" alt="User" /> @* Resim veritabanında kayıtlı olacak. kullanıcı profil resmi. *@
-                </div>
-                <div class="info-container">
-                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Huseyin</div>
-                    <div class="email">huseyin.simsek@example.com</div> @* Mail'de veritabanında olacak. kullanıcı tablosunda tutulacak. *@
-                    <div class="btn-group user-helper-dropdown">
-                        <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
-                        <ul class="dropdown-menu pull-right">
-                            <li><a href="@Url.Action("Index","Profile")"><i class="material-icons">person</i>Profil</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">input</i>Çıkış</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- #User Info -->
             <!-- Menu -->
             <div class="menu">
                 <ul class="list">
@@ -146,29 +132,79 @@
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="@Url.Action("Index","Cows")">İnek</a>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>İnekler</span>
+                                </a>
+                                <ul class="ml-menu">
+                                    <li>
+                                        <a href="@Url.Action("Index","Cows")">Çifliktekiler</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Index","Cows",new {state=2 })">Satılanlar</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Index","Cows",new {state=3 })">Ölenler</a>
+                                    </li>
+                                </ul>
                             </li>
                             <li>
-                                <a href="@Url.Action("Index","Calves")">Buzağı</a>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>Düveler</span>
+                                </a>
+                                <ul class="ml-menu">
+                                    <li>
+                                        <a href="@Url.Action("Index","Heifers")">Çifliktekiler</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Index","Heifers",new {state=2 })">Satılanlar</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Index","Heifers",new {state=3 })">Ölenler</a>
+                                    </li>
+                                </ul>
                             </li>
                             <li>
-                                <a href="@Url.Action("Index","Heifers")">Düve</a>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>Buzağılar</span>
+                                </a>
+                                <ul class="ml-menu">
+                                    <li>
+                                        <a href="@Url.Action("Index","Calves")">Çifliktekiler</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Index","Calves",new {state=2 })">Satılanlar</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Index","Calves",new {state=3 })">Ölenler</a>
+                                    </li>
+                                </ul>
                             </li>
                             <li>
-                                <a href="@Url.Action("Index","Steers")">Dana</a>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>Danalar</span>
+                                </a>
+                                <ul class="ml-menu">
+                                    <li>
+                                        <a href="@Url.Action("Index","Steers")">Çifliktekiler</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Index","Steers",new {state=2 })">Satılanlar</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Index","Steers",new {state=3 })">Ölenler</a>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
-                    </li>
-                </ul>
             </div>
             <!-- #Menu -->
             <!-- Footer -->
             <div class="legal">
-                <div class="copyright">
-                    &copy; @DateTime.Now.Year <a href="javascript:void(0);"></a>
+                <div>
+                    <p>Github: <strong><a href="https://github.com/Huseyin6" target="_blank">@@Huseyin6</a></strong> </p>
                 </div>
-                <div class="version">
-                    <p>Template: AdminBsb</p>
+                <div class="copyright">
+                    <p>Template: <strong>AdminBsb &copy; @DateTime.Now.Year</strong> </p>
                 </div>
             </div>
             <!-- #Footer -->
@@ -176,7 +212,7 @@
         <!-- #END# Left Sidebar -->
     </section>
 
-    <section class="content">
+    <section class="content" style="margin-top:25px">
         <div class="container-fluid">
             @RenderBody()
         </div>
@@ -197,29 +233,27 @@
     <script src="~/Content/jquery-datatable/jquery.dataTables.js"></script>
     <script src="~/Content/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
 
-    <!-- Jquery CountTo Plugin Js -->
-    <script src="~/Content/jquery-countto/jquery.countTo.js"></script>
-
-    <!-- Morris Plugin Js -->
-    <script src="~/Content/raphael/raphael.min.js"></script>
-
     <!-- ChartJs -->
-    <script src="~/Content/chartjs/Chart.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
 
-
-    <script src="~/Content/momentjs/moment.js"></script>
-    
     <!-- Bootstrap Datepicker-->
     <script src="~/Content/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 
     <script src="~/Content/bootstrap-datepicker/locales/bootstrap-datepicker.tr.min.js"></script>
-    <!-- Sparkline Chart Plugin Js -->
-    <script src="~/Content/jquery-sparkline/jquery.sparkline.js"></script>
+
     <script src="~/Content/bootstrap-confirmation.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
     <!-- Custom Js -->
     <script src="~/Content/js/admin.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <script src="https://www.chartjs.org/samples/latest/utils.js"></script>
+
     <script src="~/Content/jquery-datatable/table/jquery-datatable.js"></script>
     <script src="~/Content/js/pages/ui/modals.js"></script>
     <script src="~/Content/js/pages/forms/basic-form-elements.js"></script>

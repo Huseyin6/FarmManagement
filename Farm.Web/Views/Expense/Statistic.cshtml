@@ -5,4 +5,128 @@
 }
 
 <h2>Statistic</h2>
+<div class="card" style="width:75%">
+    <canvas id="myChart" height="100"></canvas>
+</div>
+<div class="card" style="width:75%">
+    <canvas id="lineChart" height="100"></canvas>
+</div>
 
+<script>
+    $(function () {
+        var color = Chart.helpers.color;
+
+        const groupBy = key => array => array.reduce((objectsByKeyValue, obj) => ({
+            ...objectsByKeyValue,
+            [obj[key]]: (objectsByKeyValue[obj[key]] || []).concat(obj)
+        }), {});
+
+     $.ajax({
+        url: "@Url.Action("GetData","Expense")",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        data:data,
+        success: function (data) {
+            var lastData = [];
+            var dataset = [];
+            lastData = groupBy("Name")(data);
+
+            console.log(lastData);
+
+            $.each(lastData, function (i, value) {
+
+                var datas = [];
+
+                var set = [];
+                $.each(value, function (cI, cValues) {
+                    datas.push(cValues.Sum);
+                    set = {
+                        xAxisId: cValues.Month,
+                    }
+                })
+
+                var set = {
+                    ...set,
+                    label: i,
+                    data: datas,
+                    borderWidth: 1,
+                }
+
+                if (i == "Yem Alımı") {
+                    set = {
+                        ...set,
+                        backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+                        borderColor: window.chartColors.red
+                    }
+                }
+                else if (i == "İlaç Alımı") {
+                    set = {
+                        ...set,
+                        backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+                        borderColor: window.chartColors.blue
+                    }
+                }
+                else if (i == "Veteriner Ücreti") {
+                    set = {
+                        ...set,
+                        backgroundColor: color(window.chartColors.green).alpha(0.5).rgbString(),
+                        borderColor: window.chartColors.green
+                    }
+                }
+                else if (i == "Çiftlik Giderleri") {
+                    set = {
+                        ...set,
+                        backgroundColor: color(window.chartColors.yellow).alpha(0.5).rgbString(),
+                        borderColor: window.chartColors.yellow
+                    }
+                }
+                else if (i == "Diğer Giderler") {
+                    set = {
+                        ...set,
+                        backgroundColor: color(window.chartColors.purple).alpha(0.5).rgbString(),
+                        borderColor: window.chartColors.purple
+                    }
+                }
+                dataset.push(set)
+            })
+
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var ctx1 = document.getElementById('lineChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz','Ağustos',"Eylül",'Ekim','Kasım','Aralık'],
+                    datasets: dataset
+                },
+                options: {
+                    responsive: true,
+                    legend: {
+                        position:'top'
+                    },
+                    title: {
+                        display: true,
+                        text:'Aylara Göre Gider Dağılımı'
+                    }
+                }
+            });
+            var myChart1 = new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz','Ağustos',"Eylül",'Ekim','Kasım','Aralık'],
+                    datasets: dataset
+                },
+                options: {
+                    responsive: true,
+                    legend: {
+                        position:'top'
+                    },
+                    title: {
+                        display: true,
+                        text:'Aylara Göre Gider Dağılımı'
+                    }
+                }
+            });
+        }
+        });
+    });
+</script>

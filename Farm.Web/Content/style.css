@@ -10132,7 +10132,7 @@ fieldset[disabled] .form-control {
         bottom: 0;
         width: 100%;
         border-top: 1px solid #eee;
-        padding: 15px;
+        padding: 5px 15px;
         overflow: hidden;
     }
 

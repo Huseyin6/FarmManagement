@@ -60,6 +60,7 @@ namespace Farm.Web.Controllers
             return View(model);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(HeifersViewModel model)
         {
             model.StateSelectList = selectList;
@@ -82,6 +83,7 @@ namespace Farm.Web.Controllers
             return View(Vmodel);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, HeifersViewModel model)
         {
             model.StateSelectList = selectList;
@@ -101,6 +103,31 @@ namespace Farm.Web.Controllers
             db.Repository.RemoveById(id);
             db.Commit();
             return RedirectToAction("Index", "Cows");
+        }
+        [AjaxOnly]
+        public ActionResult ChangePregnantState(int id)
+        {
+            var repo = db.Repository.GetById(id);
+            if (repo.IsPregnant)
+            {
+
+                repo.IsPregnant = !repo.IsPregnant;
+            }
+            else
+            {
+                if (repo.PregnantDate.HasValue)
+                {
+                    repo.IsPregnant = !repo.IsPregnant;
+                }
+                else
+                {
+                    return Json(new { success = false }, JsonRequestBehavior.AllowGet);
+                }
+            }
+
+            db.Repository.Update(repo);
+            db.Commit();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
 
     }

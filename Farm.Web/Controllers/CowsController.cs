@@ -54,13 +54,13 @@ namespace Farm.Web.Controllers
 
             }
             else if(state == null && IsPregnant==true && IsLactation == null){
-                return View(db.Repository.GetMany(m => m.CattleTypeId == (int)CattleTypes.Cow && m.IsPregnant));
+                return View(db.Repository.GetMany(m => m.CattleTypeId == (int)CattleTypes.Cow && m.IsPregnant && m.StateId == 1));
             }
             else if (state == null && IsPregnant == null && IsLactation == true)
             {
-                return View(db.Repository.GetMany(m => m.CattleTypeId == (int)CattleTypes.Cow && m.IsLactation));
+                return View(db.Repository.GetMany(m => m.CattleTypeId == (int)CattleTypes.Cow && m.IsLactation && m.StateId == 1));
             }
-            return View(db.Repository.GetMany(m => m.CattleTypeId == (int)CattleTypes.Cow));
+            return View(db.Repository.GetMany(m => m.CattleTypeId == (int)CattleTypes.Cow && m.StateId==1));
         }
         public ActionResult Create()
         {
@@ -70,6 +70,7 @@ namespace Farm.Web.Controllers
             return View(model);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(CowsViewModel model)
         {
             model.StateSelectList = selectList;
@@ -93,6 +94,7 @@ namespace Farm.Web.Controllers
             return View(Vmodel);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, CowsViewModel model)
         {
             model.StateSelectList = selectList;
@@ -113,14 +115,37 @@ namespace Farm.Web.Controllers
             db.Commit();
             return RedirectToAction("Index", "Cows");
         }
-        //[AjaxOnly]
-        //public ActionResult ChangeState(int id)
-        //{
-        //    var repo = db.CowsRepository.GetById(id);
+        [AjaxOnly]
+        public ActionResult ChangePregnantState(int id)
+        {
+            var repo = db.Repository.GetById(id);
+            if (repo.IsPregnant)
+            {
 
-        //    db.CowsRepository.Update(repo);
-        //    db.Commit();
-        //    return JsonSuccess();
-        //}
+                repo.IsPregnant = !repo.IsPregnant;
+            }
+            else
+            {
+                if(repo.PregnantDate.HasValue){
+                    repo.IsPregnant = !repo.IsPregnant;
+                }
+                else{
+                    return Json(new { success= false},JsonRequestBehavior.AllowGet);
+                }
+            }
+
+            db.Repository.Update(repo);
+            db.Commit();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+        [AjaxOnly]
+        public ActionResult ChangeLactationState(int id)
+        {
+            var repo = db.Repository.GetById(id);
+            repo.IsLactation = !repo.IsLactation;
+            db.Repository.Update(repo);
+            db.Commit();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

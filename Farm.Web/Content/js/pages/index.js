@@ -1,13 +1,4 @@
 ﻿$(function () {
-    //Widgets count
-    $('.count-to').countTo();
-
-    //Sales count to
-    $('.sales-count-to').countTo({
-        formatter: function (value, options) {
-            return '$' + value.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, ' ').replace('.', ',');
-        }
-    });
 
     //initRealTimeChart();
     //initDonutChart();
@@ -167,24 +158,19 @@ $("[data-toggle='asyncswitch']", 'body').bootstrapSwitch({
     labelWidth: 25,
     handleWidth: 30
 });
-//$("[data-toggle='asyncswitch']", 'body').on('switchChange.bootstrapSwitch', function (e) {
-//    //var relatedSwitch = $(this);
-//    //$.ajax({
-//    //    url: $(this).data("url"),
-//    //    type: "POST",
-//    //    success: function (result) {
-//    //        if (relatedSwitch.data("reload")) {
-//    //            location.reload();
-//    //        }
-//    //        toastr.success(successMessage);
-//    //    },
-//    //    error: function (result) {
-//    //        relatedSwitch.bootstrapSwitch('toggleState', !relatedSwitch.bootstrapSwitch('state'));
-//    //        toastr.error(errorMessage);
-//    //    }
-//    //});
-   
-//});
+$("[data-toggle='asyncswitch']", 'body').on('switchChange.bootstrapSwitch', function (e) {
+    var relatedSwitch = $(this);
+    $.ajax({
+        url: $(this).data("url"),
+        type: "POST",
+        success: function (result) {
+            location.reload();
+        },
+        error: function (result) {
+            relatedSwitch.bootstrapSwitch('toggleState', !relatedSwitch.bootstrapSwitch('state'));
+        }
+    });
+});
 $('[data-toggle="confirmation"]', 'body').confirmation({
     singleton: true,
     popout: true,
@@ -226,8 +212,9 @@ $('[data-toggle="confirmation"]', 'body').confirmation({
                         row.remove();
                     }
                 }
+                location.reload();
+
                 $('.tooltip ').remove();
-                //toastr.success('Silindi!');
             },
             error: function (result) {
                 document.location = errorPage;
@@ -236,7 +223,7 @@ $('[data-toggle="confirmation"]', 'body').confirmation({
     }
 }).on('cancel.bs.confirmation', function () {
     $('.tooltip ').remove();
-    });
+});
 function showDialog() {
     var size = $(this).data("asyncmodal-size");
     var reload = $(this).data("asyncmodal-reload");

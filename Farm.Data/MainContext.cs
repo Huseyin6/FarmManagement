@@ -14,8 +14,7 @@ namespace Farm.Data
         public MainContext(): base("name=heroku-postgre-db"){
         }
         public DbSet<Cattle> Cattles { get; set; }
-        //public DbSet<State> States { get; set; }
-        //public DbSet<CattleType> CattleTypes { get; set; }
+        public DbSet<FinancialAsset> FinancialAssets{ get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
