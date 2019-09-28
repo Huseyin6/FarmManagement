@@ -18,6 +18,7 @@ Ayrıca gelir ve giderlerin tiplerine göre kaydedilmesi ve bunların chart'lar 
 * Hayvan durumu satıldı yapıldığında kaydedilirken satış miktarını gelir tablosuna kaydetmesi için bir modal açılarak kaydedilmeli. Böylece kullanıcı iki işlem yapmadan tek bir yerden yapabilmelidir.
 
 ### Kullandığım Yapılar
+* AdminBsb Template
 * Repository Desing Pattern. İki katman kullandım: Data ve Web(MVC - .net) 
 * Unit Of Work
 * Heroku Postgre Db
