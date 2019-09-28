@@ -1,0 +1,6 @@
+﻿@model CalvesViewModel
+<h2>Buzağı Düzenle</h2>
+@using (Html.BeginForm("Edit", "Calves", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.Partial("_CreateOrEdit")
+}

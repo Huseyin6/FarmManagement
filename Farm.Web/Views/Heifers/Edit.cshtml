@@ -1,0 +1,6 @@
+﻿@model HeifersViewModel
+<h2>Düve Bilgilerini Düzenle</h2>
+@using (Html.BeginForm("Edit", "Heifers", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.Partial("_CreateOrEdit")
+}

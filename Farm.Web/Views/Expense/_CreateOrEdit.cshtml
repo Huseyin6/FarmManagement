@@ -1,0 +1,55 @@
+﻿@model BaseFinancialViewModel
+@Html.AntiForgeryToken()
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="form-group" style="margin-bottom:15px">
+            @Html.LabelFor(m => m.FinancialAssetTypeId, "Gelir Türü", new { @class = "col-lg-3 col-xl-2 control-label" })
+            <div class="col-md-6 form-inline" id="state-select-list">
+                @Html.DropDownListFor(m => m.FinancialAssetTypeId, Model.SelectList, new { htmlAttributes = new { @class = " bootstrap-select form-control show-tick" } })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Description, "Açıklama", new { @class = "col-lg-3 col-xl-2 control-label" })
+            <div class="col-md-6 form-inline">
+                @Html.TextAreaFor(m => m.Description, new { @class = "form-control summernote" })
+                @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group" style="margin-bottom:15px">
+            @Html.LabelFor(m => m.Total, "Tutar", new { @class = "col-lg-3 col-xl-2 control-label" })
+            <div class="col-md-6">
+                <div class="form-line">
+                    @Html.EditorFor(m => m.Total, new { htmlAttributes = new { @class = "form-control", placeholder = "Lütfen tutarı giriniz" } })
+                </div>
+            </div>
+        </div>
+        <div class="form-group" style="margin-bottom:15px">
+            @Html.LabelFor(m => m.TransactionDate, "İşlem Tarihi", new { @class = "col-lg-3 col-xl-2 control-label " })
+            <div class="col-md-6">
+                <div class="form-line" id="bs_datepicker_container">
+                    @Html.EditorFor(m => m.TransactionDate, new { htmlAttributes = new { @Value = Model.TransactionDate.ToString("dd/MM/yyyy"), @class = "form-control", placeholder = "Lütfen Tarih Giriniz..." } })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group" style="margin-top:10px">
+            <div class="col-md-12">
+                <div class="modal-footer">
+                    @Html.SaveButtons(Url.Action("Table", "Expense"))
+                    @Html.CancelButton(Url.Action("Table", "Expense"))
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.summernote').summernote({
+            height: 150,
+            placeholder:'Açıklama Giriniz!'
+        });
+    });
+</script>
+
+

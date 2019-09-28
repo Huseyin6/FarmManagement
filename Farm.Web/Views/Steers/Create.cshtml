@@ -1,0 +1,6 @@
+﻿@model SteersViewModel
+<h2>Dana Ekle</h2>
+@using (Html.BeginForm("Create", "Steers", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.Partial("_CreateOrEdit")
+}
